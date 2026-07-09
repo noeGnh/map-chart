@@ -10,7 +10,7 @@
     "deploy": "gh-pages -d dist -b demo"
   },
   "dependencies": {
-    "vue": "^3.5.38",
+    "vue": "^3.5.39",
     "vue3-map-chart": "workspace:*",
     "vue3-map-chart-lite": "workspace:*"
   },
