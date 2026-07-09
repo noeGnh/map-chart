@@ -19,6 +19,6 @@
     "rollup-plugin-visualizer": "^7.0.1",
     "vite": "^8.1.2",
     "vite-svg-loader": "^5.1.1",
-    "vue-tsc": "^3.3.4"
+    "vue-tsc": "^3.3.7"
   }
 }
