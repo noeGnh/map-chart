@@ -87,8 +87,8 @@ importers:
         specifier: ^3.5.38
         version: 3.5.38(typescript@6.0.3)
       vue-tsc:
-        specifier: ^3.3.4
-        version: 3.3.4(typescript@6.0.3)
+        specifier: ^3.3.7
+        version: 3.3.7(typescript@6.0.3)
 
   packages/docs:
     dependencies:
@@ -125,8 +125,8 @@ importers:
         specifier: ^5.1.1
         version: 5.1.1(vue@3.5.38(typescript@6.0.3))
       vue-tsc:
-        specifier: ^3.3.4
-        version: 3.3.4(typescript@6.0.3)
+        specifier: ^3.3.7
+        version: 3.3.7(typescript@6.0.3)
 
   packages/vue3-map-chart:
     dependencies:
@@ -1632,8 +1632,8 @@ packages:
       typescript:
         optional: true
 
-  '@vue/language-core@3.3.4':
-    resolution: {integrity: sha512-IuHqQ5zGGOE7CXP72VX6A42IVeIzYv4WAhO6arej11TRNqtdZfGyH8Yr2FOCaDX0dSQG+JwULLoFHGY1igYVjQ==}
+  '@vue/language-core@3.3.7':
+    resolution: {integrity: sha512-LzmkKinXAMMoh8Jfi/jMUSDUjuPdv8mynH5WJGKfXyZtDw3hQ6GBaoI6Bcnl/Xqlu32q/0Z6i/trp4VXykzyLw==}
 
   '@vue/reactivity@3.5.27':
     resolution: {integrity: sha512-vvorxn2KXfJ0nBEnj4GYshSgsyMNFnIQah/wczXlsNXt+ijhugmW+PpJ2cNPe4V6jpnBcs0MhCODKllWG+nvoQ==}
@@ -3981,8 +3981,8 @@ packages:
     peerDependencies:
       eslint: '>=6.0.0'
 
-  vue-tsc@3.3.4:
-    resolution: {integrity: sha512-XA/JqmQwS2GZmfgpjOEGdrKwaTSEuPwxpHa7/t6f4yiGrJb3gVHTPb9wBfByMNZwQ+xDXs41b8gaS2DKsOozUw==}
+  vue-tsc@3.3.7:
+    resolution: {integrity: sha512-+C+rgD49wAQ5bUTl2sp5a8Bzg4YoldMNXM+g7CFe604MYcQ8PrZPMQhIjJSzKXtPBCa+C5ayMipqjbA7splekQ==}
     hasBin: true
     peerDependencies:
       typescript: '>=5.0.0'
@@ -5409,15 +5409,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vue/language-core@3.3.4':
+  '@vue/language-core@3.3.7':
     dependencies:
       '@volar/language-core': 2.4.28
       '@vue/compiler-dom': 3.5.39
-      '@vue/shared': 3.5.38
+      '@vue/shared': 3.5.39
       alien-signals: 3.2.1
       muggle-string: 0.4.1
       path-browserify: 1.0.1
-      picomatch: 4.0.4
+      picomatch: 4.0.5
 
   '@vue/reactivity@3.5.27':
     dependencies:
@@ -8172,10 +8172,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vue-tsc@3.3.4(typescript@6.0.3):
+  vue-tsc@3.3.7(typescript@6.0.3):
     dependencies:
       '@volar/typescript': 2.4.28
-      '@vue/language-core': 3.3.4
+      '@vue/language-core': 3.3.7
       typescript: 6.0.3
 
   vue@3.5.27(typescript@6.0.3):
