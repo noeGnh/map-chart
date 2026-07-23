@@ -1,7 +1,8 @@
 packages:
   - packages/*
 
-onlyBuiltDependencies:
-  - esbuild
-  - unrs-resolver
-  - vue-demi
+minimumReleaseAge: 0
+
+allowBuilds:
+  esbuild: true
+  unrs-resolver: true

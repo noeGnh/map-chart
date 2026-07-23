@@ -4,7 +4,7 @@ import { mkdirSync, writeFileSync } from 'fs'
 import { basename, dirname, relative } from 'path'
 
 async function run() {
-  const files = await fg('../vue3-map-chart/src/assets/maps/**/*.svg')
+  const files = (await fg('../vue3-map-chart/src/assets/maps/**/*.svg')).sort()
 
   const names = files.map((file) => basename(file).replace(/\.svg$/, ''))
 
