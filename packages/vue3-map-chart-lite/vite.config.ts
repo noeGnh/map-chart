@@ -3,20 +3,10 @@ import vue from '@vitejs/plugin-vue'
 // import { visualizer } from 'rollup-plugin-visualizer'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-import { readFileSync } from 'fs'
 import { fileURLToPath } from 'url'
 import { defineConfig } from 'vite'
 
-const pkg = JSON.parse(
-  readFileSync(fileURLToPath(new URL('./package.json', import.meta.url)), 'utf-8')
-)
-
 export default defineConfig({
-  define: {
-    // Pins the runtime map fetch (see MapChart.vue) to this exact release
-    // instead of a mutable branch.
-    __V3MC_VERSION__: JSON.stringify(pkg.version),
-  },
   plugins: [
     vue(),
     /* visualizer({

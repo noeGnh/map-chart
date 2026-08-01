@@ -20,6 +20,7 @@
     isValidIsoCode,
     sanitizeSVG,
   } from '../utils'
+  import { V3MC_VERSION } from '../version'
   import Tooltip from './Tooltip.vue'
 
   // handle props
@@ -211,7 +212,7 @@
 
   // Cache key includes the package version so upgrading never serves a map
   // fetched/cached by a previous release.
-  const mapCacheKey = (name: string) => `${name}@${__V3MC_VERSION__}`
+  const mapCacheKey = (name: string) => `${name}@${V3MC_VERSION}`
 
   const loadSvgMap = async (): Promise<void> => {
     if (props.customMapSvg && isSVG(props.customMapSvg)) {
@@ -231,7 +232,7 @@
           const fetchData = async () => {
             // Pinned to this exact release (immutable) instead of a mutable
             // branch, and served through a real CDN rather than raw.githubusercontent.com.
-            const svgUrl = `https://cdn.jsdelivr.net/gh/noeGnh/vue3-map-chart@v${__V3MC_VERSION__}/packages/vue3-map-chart/src/assets/maps/${type.template}`
+            const svgUrl = `https://cdn.jsdelivr.net/gh/noeGnh/vue3-map-chart@v${V3MC_VERSION}/packages/vue3-map-chart/src/assets/maps/${type.template}`
 
             isLoading.value = true
 

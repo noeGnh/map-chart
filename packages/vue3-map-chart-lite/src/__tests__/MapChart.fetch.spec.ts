@@ -8,6 +8,7 @@ import { h } from 'vue'
 // scripts/generate-svg-map-exports.ts.
 import AfricaMapSvg from '../../../vue3-map-chart/src/assets/maps/continents/africa.svg?raw'
 import MapChart from '../components/MapChart.vue'
+import { V3MC_VERSION } from '../version'
 
 // Mirrors what scripts/generate-svg-map-exports.ts generates for a built-in
 // map — MapChart reads this object off the vnode `type`, see loadSvgMap().
@@ -57,7 +58,7 @@ describe('built-in map fetch', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1)
     const [calledUrl] = fetchMock.mock.calls[0] as [string]
     expect(calledUrl).toBe(
-      `https://cdn.jsdelivr.net/gh/noeGnh/vue3-map-chart@v${__V3MC_VERSION__}/packages/vue3-map-chart/src/assets/maps/continents/africa.svg`
+      `https://cdn.jsdelivr.net/gh/noeGnh/vue3-map-chart@v${V3MC_VERSION}/packages/vue3-map-chart/src/assets/maps/continents/africa.svg`
     )
 
     expect(wrapper.find('.v3mc-tiny-loader-wrapper').attributes('style')).toContain(
@@ -78,7 +79,7 @@ describe('built-in map fetch', () => {
     await flushPromises()
     expect(fetchMock).toHaveBeenCalledTimes(1)
 
-    const cacheKey = `AfricaMap@${__V3MC_VERSION__}`
+    const cacheKey = `AfricaMap@${V3MC_VERSION}`
     expect(localStorage.getItem(cacheKey)).toBeTruthy()
 
     mountWithMap()
