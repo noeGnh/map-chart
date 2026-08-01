@@ -35,6 +35,17 @@
       "env": {
         "node": false
       }
+    },
+    {
+      "files": ["packages/react-map-chart/src/**/*.{ts,tsx}"],
+      "env": {
+        "node": false
+      },
+      "plugins": ["react-hooks"],
+      "rules": {
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
+      }
     }
   ]
 }

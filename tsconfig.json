@@ -28,6 +28,13 @@
     {
       "path": "./packages/vue3-map-chart-lite/tsconfig.vitest.json"
     },
+    // React plugin
+    {
+      "path": "./packages/react-map-chart/tsconfig.app.json"
+    },
+    {
+      "path": "./packages/react-map-chart/tsconfig.vitest.json"
+    },
     // Playground
     {
       "path": "./packages/playground/tsconfig.app.json"

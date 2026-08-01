@@ -1,0 +1,30 @@
+.v3mc-container {
+  padding: 5px;
+  position: relative;
+}
+
+.v3mc-tooltip {
+  position: fixed;
+  z-index: 9999;
+}
+
+.v3mc-tooltip-wrapper {
+  display: inline-block;
+  min-width: 150px;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.v3mc-tooltip-label {
+  font-size: 1rem;
+  line-height: 20px;
+}
+
+.v3mc-tooltip-divider {
+  height: 0.5px;
+  margin: 5px 0;
+}
+
+.v3mc-tooltip-value {
+  font-weight: bold;
+}

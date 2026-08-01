@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.app.json",
+  "include": ["src/**/*", "src/types/**/*", "*.d.ts", "vitest.setup.ts"],
+  "exclude": [],
+  "compilerOptions": {
+    "composite": true,
+    "types": ["node", "jsdom"]
+  }
+}

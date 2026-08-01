@@ -12,15 +12,16 @@
   "scripts": {
     "docs": "pnpm -F docs run dev",
     "dev": "pnpm -F playground run dev",
-    "test": "pnpm -F '@map-chart/core' -F vue3-map-chart -F vue3-map-chart-lite run test",
-    "test-ci": "pnpm -F '@map-chart/core' -F vue3-map-chart -F vue3-map-chart-lite run test-ci",
-    "build": "pnpm build-plugin && pnpm build-plugin-lite && pnpm build-playground && pnpm build-docs",
+    "test": "pnpm -F '@map-chart/core' -F vue3-map-chart -F vue3-map-chart-lite -F '@arkn/react-map-chart' run test",
+    "test-ci": "pnpm -F '@map-chart/core' -F vue3-map-chart -F vue3-map-chart-lite -F '@arkn/react-map-chart' run test-ci",
+    "build": "pnpm build-plugin && pnpm build-plugin-lite && pnpm build-plugin-react && pnpm build-playground && pnpm build-docs",
     "build-plugin": "pnpm -r -F vue3-map-chart run build",
     "build-plugin-lite": "pnpm -r -F vue3-map-chart-lite run build",
+    "build-plugin-react": "pnpm -r -F '@arkn/react-map-chart' run build",
     "build-playground": "pnpm -F playground run build",
     "build-docs": "pnpm -F docs run build",
-    "lint": "eslint --ext .js,.ts,.vue .",
-    "lint:fix": "eslint --ext .js,.ts,.vue . --fix",
+    "lint": "eslint --ext .js,.ts,.vue,.tsx .",
+    "lint:fix": "eslint --ext .js,.ts,.vue,.tsx . --fix",
     "format": "prettier . --write",
     "commit": "git add --all && git commit",
     "commit-push": "git add --all && git commit && git push origin --all",
@@ -33,7 +34,7 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,ts,vue}": [
+    "**/*.{js,ts,vue,tsx}": [
       "eslint . --fix",
       "prettier . --write"
     ]
@@ -54,6 +55,7 @@
     "eslint": "^8.57.1",
     "eslint-import-resolver-typescript": "^4.4.5",
     "eslint-plugin-prettier": "^5.5.6",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-vue": "^9.33.0",
     "husky": "^9.1.7",
     "jsdom": "^30.0.1",
