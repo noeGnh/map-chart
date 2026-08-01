@@ -1,7 +1,7 @@
 {
   "name": "@arkn/react-map-chart-lite",
   "description": "React component for rendering interactive SVG maps of the world, continents, and countries with dynamic data. Loads built-in maps dynamically from a CDN at runtime.",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "private": false,
   "author": "Noé Gnanih <noegnanih@gmail.com>",
   "license": "MIT",

@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [v0.4.1](https://github.com/noeGnh/vue3-map-chart/compare/v0.4.0...v0.4.1)
+## [v0.4.2](https://github.com/noeGnh/vue3-map-chart/compare/v0.4.1...v0.4.2)
+
+### Commits
+
+- fix: stop publishing @map-chart/core as a runtime dependency [`bab58d9`](https://github.com/noeGnh/vue3-map-chart/commit/bab58d9de25d5f5f209e084f51dabbac7e896343)
+
+## [v0.4.1](https://github.com/noeGnh/vue3-map-chart/compare/v0.4.0...v0.4.1) - 2026-08-01
 
 ### Commits
 
