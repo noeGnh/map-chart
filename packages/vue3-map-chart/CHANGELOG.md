@@ -5,7 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [v0.3.0](https://github.com/noeGnh/vue3-map-chart/compare/v0.2.0...v0.3.0)
+## [v0.4.0](https://github.com/noeGnh/vue3-map-chart/compare/v0.3.0...v0.4.0)
+
+### Commits
+
+- refactor: extract a framework-agnostic core package [`4f6a63d`](https://github.com/noeGnh/vue3-map-chart/commit/4f6a63de0a63ec6c22593ea7ba5473900cf76429)
+- feat: add @arkn/react-map-chart, a React port on top of @map-chart/core [`4973561`](https://github.com/noeGnh/vue3-map-chart/commit/4973561f8706ba7a31ee0bc376c150fe9d0ec709)
+- feat: add @arkn/react-map-chart-lite [`93312b2`](https://github.com/noeGnh/vue3-map-chart/commit/93312b2e9a82d9c5e25a25defcf32d020e79d34e)
+
+## [v0.3.0](https://github.com/noeGnh/vue3-map-chart/compare/v0.2.0...v0.3.0) - 2026-08-01
 
 ### Merged
 
