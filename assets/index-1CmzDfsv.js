@@ -48445,7 +48445,7 @@ var App_default = /*#__PURE__*/ _plugin_vue_export_helper_default(App_vue_vue_ty
 //#region \0vite/preload-helper.js
 var scriptRel = "modulepreload";
 var assetsURL = function(dep) {
-	return "/vue3-map-chart/" + dep;
+	return "/map-chart/" + dep;
 };
 var seen = {};
 //#endregion
