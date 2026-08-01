@@ -5,6 +5,7 @@
   "author": "Noé Gnanih <noegnanih@gmail.com>",
   "license": "MIT",
   "private": true,
+  "packageManager": "pnpm@11.18.0",
   "workspaces": [
     "packages/*"
   ],
