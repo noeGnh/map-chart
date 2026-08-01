@@ -10,6 +10,8 @@ A Vue JS Component for displaying dynamic data on a world, continents and countr
 
 There are two versions of this package: `vue3-map-chart` and `vue3-map-chart-lite`. The `vue3-map-chart-lite` version loads maps dynamically from a CDN at runtime, so they are not bundled with your application. This keeps your build lightweight, ideal for users who only need a few maps or want to reduce initial load time. On the other hand, the full `vue3-map-chart` version includes all maps locally, offering faster access and offline support at the cost of a larger bundle size.
 
+Built-in maps are fetched from jsDelivr, pinned to the exact `vue3-map-chart-lite` version you have installed (never a mutable branch), sanitized with [DOMPurify](https://github.com/cure53/DOMPurify) before being rendered, and cached in `localStorage` for 28 days.
+
 If you are using npm:
 
 ```sh
@@ -151,8 +153,9 @@ The key must be a valid [ISO 3166-1 country code](https://en.wikipedia.org/wiki/
 | formatValueWithSiPrefix | boolean                                                           | Formats a number with a magnitude suffix                                                                                                            | false                      | No       |
 | forceCursorPointer      | boolean                                                           | Force the cursor to be in pointer mode even when the legend display is disabled                                                                     | false                      | No       |
 | loaderColor             | string                                                            | Color of the loader (Only for lite version)                                                                                                         | '#3498db'                  | No       |
-| custom-map-svg          | string                                                            | Raw SVG string (imported with `?raw` or defined inline). When provided, overrides the built-in maps. See [example](#example-using-a-custom-svg-map) | undefined                  | No       |
-| custom-map-labels       | Record<string, string>                                            | Maps SVG `id`s to display names for tooltips. Used with `custom-map-svg`. See [example](#example-using-a-custom-svg-map)                            | undefined                  | No       |
+| customMapSvg            | string                                                            | Raw SVG string (imported with `?raw` or defined inline). When provided, overrides the built-in maps. See [example](#example-using-a-custom-svg-map) | undefined                  | No       |
+| sanitizeCustomMapSvg    | boolean                                                           | Sanitize `customMapSvg` with DOMPurify before rendering it. Disable only if you trust the source and need markup DOMPurify would strip              | true                       | No       |
+| customMapLabels         | Record<string, string>                                            | Maps SVG `id`s to display names for tooltips. Used with `customMapSvg`. See [example](#example-using-a-custom-svg-map)                              | undefined                  | No       |
 
 ## Slots
 
