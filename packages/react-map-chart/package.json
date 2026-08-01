@@ -39,6 +39,7 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
+    "@map-chart/core": "workspace:*",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.2",
     "@types/jsdom": "^28.0.3",
@@ -86,8 +87,5 @@
   "homepage": "https://github.com/noeGnh/vue3-map-chart#readme",
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "@map-chart/core": "workspace:*"
   }
 }

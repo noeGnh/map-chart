@@ -38,8 +38,10 @@
     "vue": "^3.4.0"
   },
   "devDependencies": {
+    "@map-chart/core": "workspace:*",
     "@types/jsdom": "^28.0.3",
     "@types/node": "^26.1.2",
+    "@vueuse/core": "^14.3.0",
     "auto-changelog": "^2.6.0",
     "fast-glob": "^3.3.3",
     "i18n-iso-countries": "^7.14.0",
@@ -81,9 +83,5 @@
   "homepage": "https://github.com/noeGnh/vue3-map-chart#readme",
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "@map-chart/core": "workspace:*",
-    "@vueuse/core": "^14.3.0"
   }
 }
