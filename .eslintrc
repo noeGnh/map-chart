@@ -37,7 +37,7 @@
       }
     },
     {
-      "files": ["packages/react-map-chart/src/**/*.{ts,tsx}"],
+      "files": ["packages/react-map-chart*/src/**/*.{ts,tsx}"],
       "env": {
         "node": false
       },

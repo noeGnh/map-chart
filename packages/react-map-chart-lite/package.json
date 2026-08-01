@@ -1,0 +1,93 @@
+{
+  "name": "@arkn/react-map-chart-lite",
+  "description": "React component for rendering interactive SVG maps of the world, continents, and countries with dynamic data. Loads built-in maps dynamically from a CDN at runtime.",
+  "version": "0.1.0",
+  "private": false,
+  "author": "Noé Gnanih <noegnanih@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./*": "./*"
+  },
+  "typings": "types/index.d.ts",
+  "files": [
+    "dist",
+    "types",
+    "README.md"
+  ],
+  "scripts": {
+    "dev-server": "pnpm --parallel vite",
+    "dev-types": "tsc --noEmit -p tsconfig.app.json --watch",
+    "build": "pnpm generate:svg-map-exports && pnpm generate:version && pnpm build-lib && pnpm build-types",
+    "build-lib": "vite build",
+    "build-types": "rm -f *.tsbuildinfo && tsc --emitDeclarationOnly --declaration -p tsconfig.app.json",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "test": "vitest",
+    "test-ci": "vitest --run",
+    "version": "pnpm generate:version && git add src/version.ts && auto-changelog --template keepachangelog --hide-credit -p && git add CHANGELOG.md",
+    "generate:svg-map-exports": "tsx scripts/generate-svg-map-exports.ts",
+    "generate:version": "tsx scripts/generate-version.ts"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/jsdom": "^28.0.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.0.5",
+    "auto-changelog": "^2.6.0",
+    "fast-glob": "^3.3.3",
+    "i18n-iso-countries": "^7.14.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "rollup-plugin-visualizer": "^7.0.1",
+    "tsx": "^4.23.1",
+    "typescript": "~6.0.3",
+    "vite": "^8.1.5",
+    "vitest": "^4.1.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noeGnh/vue3-map-chart.git"
+  },
+  "keywords": [
+    "react",
+    "map",
+    "maps",
+    "svg-map",
+    "interactive-map",
+    "data-visualization",
+    "chart",
+    "dashboard",
+    "component",
+    "react-component",
+    "frontend",
+    "geography",
+    "country-map",
+    "world-map",
+    "vector-map",
+    "lightweight-map",
+    "custom-map"
+  ],
+  "bugs": {
+    "url": "https://github.com/noeGnh/vue3-map-chart/issues"
+  },
+  "homepage": "https://github.com/noeGnh/vue3-map-chart#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@map-chart/core": "workspace:*"
+  }
+}

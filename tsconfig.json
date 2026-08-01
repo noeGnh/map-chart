@@ -35,6 +35,12 @@
     {
       "path": "./packages/react-map-chart/tsconfig.vitest.json"
     },
+    {
+      "path": "./packages/react-map-chart-lite/tsconfig.app.json"
+    },
+    {
+      "path": "./packages/react-map-chart-lite/tsconfig.vitest.json"
+    },
     // Playground
     {
       "path": "./packages/playground/tsconfig.app.json"
