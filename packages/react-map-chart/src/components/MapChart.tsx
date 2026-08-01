@@ -166,6 +166,13 @@ export function MapChart({
     }
   }, [customMapSvg, sanitizeCustomMapSvg, children])
 
+  // Memoized so the object reference is stable across re-renders that don't
+  // change svgMap — React compares dangerouslySetInnerHTML by reference, not
+  // by its __html content, so an inline `{{ __html: svgMap }}` literal would
+  // reset the DOM (wiping labels appended by renderAreaLabels) on every
+  // unrelated re-render (e.g. mousePosition updating on any mouse move).
+  const svgMapHtml = useMemo(() => ({ __html: svgMap }), [svgMap])
+
   // build map styles — the per-area data-driven fills from @map-chart/core,
   // plus the "shell" (sizing/stroke/fill/hover/cursor) that would be a
   // scoped v-bind() style in Vue but has to be plain CSS text here since it
@@ -358,7 +365,7 @@ export function MapChart({
         ref={containerRef}
         className="v3mc-map"
         style={mapStyles}
-        dangerouslySetInnerHTML={{ __html: svgMap }}
+        dangerouslySetInnerHTML={svgMapHtml}
       />
       {displayTooltip && (
         <Tooltip
