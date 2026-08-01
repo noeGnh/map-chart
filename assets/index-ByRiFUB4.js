@@ -47557,7 +47557,7 @@ function Xo(a = {}) {
 }
 var xo = 0;
 Number.POSITIVE_INFINITY;
-var qo = "0.4.1";
+var qo = "0.4.2";
 var _o = { class: "v3mc-tooltip-wrapper" };
 var $o = { class: "v3mc-tooltip-label" };
 var am = { class: "v3mc-tooltip-value" };
