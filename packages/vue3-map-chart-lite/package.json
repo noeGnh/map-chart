@@ -82,6 +82,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^14.3.0",
+    "dompurify": "^3.4.12",
     "i18n-iso-countries": "^7.14.0",
     "iso-3166-2": "^1.0.0"
   }

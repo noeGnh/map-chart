@@ -1,3 +1,5 @@
+import DOMPurify from 'dompurify'
+
 /**
  * Checks if the given value is an object and not an array or null.
  *
@@ -40,6 +42,21 @@ export function getRandomInteger(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
+// Module-scoped counter, shared by every MapChart instance across the app, so
+// their DOM ids are guaranteed unique instead of relying on a random number
+// that can collide.
+let instanceCount = 0
+
+/**
+ * Returns a new, monotonically increasing id unique to this module instance.
+ *
+ * @return {number} The next instance id.
+ */
+export function getNextInstanceId(): number {
+  instanceCount += 1
+  return instanceCount
+}
+
 /**
  * Checks if the given code is a valid ISO code.
  *
@@ -69,4 +86,17 @@ export function isSVG(input: string): boolean {
   } catch {
     return false
   }
+}
+
+/**
+ * Removes unsafe elements/attributes (scripts, event handlers, foreignObject, ...)
+ * from an SVG document before it is injected into the DOM via v-html.
+ *
+ * @param {string} input - The raw SVG markup to sanitize.
+ * @return {string} The sanitized SVG markup.
+ */
+export function sanitizeSVG(input: string): string {
+  return DOMPurify.sanitize(input, {
+    USE_PROFILES: { svg: true, svgFilters: true },
+  })
 }

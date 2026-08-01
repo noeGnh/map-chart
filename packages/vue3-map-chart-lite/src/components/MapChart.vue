@@ -14,10 +14,11 @@
   import locales from '../i18n-iso-countries-locales'
   import {
     formatNumberWithSIPrefix,
-    getRandomInteger,
+    getNextInstanceId,
     isObject,
     isSVG,
     isValidIsoCode,
+    sanitizeSVG,
   } from '../utils'
   import Tooltip from './Tooltip.vue'
 
@@ -48,6 +49,7 @@
     baseColor?: string
     loaderColor?: string
     customMapSvg?: string
+    sanitizeCustomMapSvg?: boolean
     customMapLabels?: Record<string, string>
     data: MapData
   }
@@ -77,20 +79,19 @@
     baseColor: '#0782c5',
     loaderColor: '#3498db',
     customMapSvg: '',
+    sanitizeCustomMapSvg: true,
     customMapLabels: () => ({}),
   })
 
-  onMounted(() => {
-    const registerLocale = async (langCode: string) => {
-      try {
-        if (locales[langCode]) countries.registerLocale(locales[langCode])
-      } catch (error) {
-        console.error('Error loading locale:', error)
-      }
+  const registerLocale = async (langCode: string) => {
+    try {
+      if (locales[langCode]) countries.registerLocale(locales[langCode])
+    } catch (error) {
+      console.error('Error loading locale:', error)
     }
+  }
 
-    registerLocale(props.langCode)
-  })
+  watch(() => props.langCode, registerLocale, { immediate: true })
 
   const mapHeight = computed(() =>
     typeof props.height === 'string' ? props.height : `${props.height}px`
@@ -120,7 +121,20 @@
       : 'default'
   })
 
-  const cpntId = getRandomInteger(10000, 99999)
+  const cpntId = getNextInstanceId()
+
+  // props.data keyed exactly as the SVG element ids expect it: uppercase ISO
+  // codes for built-in maps (so `data: { fr: 1 }` behaves like `{ FR: 1 }`),
+  // untouched for a customMapSvg where ids are whatever the author chose.
+  const normalizedData = computed<MapData>(() => {
+    if (props.customMapSvg && isSVG(props.customMapSvg)) return props.data
+
+    const result: MapData = {}
+    Object.keys(props.data).forEach((key) => {
+      result[key.toUpperCase()] = props.data[key]
+    })
+    return result
+  })
 
   // handle events
 
@@ -148,7 +162,7 @@
       ) => {
         const id = target.getAttribute('id')
         currentAreaId.value = id
-        currentAreaValue.value = id ? props.data[id] : null
+        currentAreaValue.value = id ? normalizedData.value[id] : null
         if (
           (id &&
             isValidIsoCode(id) &&
@@ -195,9 +209,15 @@
   const svgMap = ref<string | null>(null)
   const isLoading = ref(false)
 
+  // Cache key includes the package version so upgrading never serves a map
+  // fetched/cached by a previous release.
+  const mapCacheKey = (name: string) => `${name}@${__V3MC_VERSION__}`
+
   const loadSvgMap = async (): Promise<void> => {
     if (props.customMapSvg && isSVG(props.customMapSvg)) {
-      svgMap.value = props.customMapSvg
+      svgMap.value = props.sanitizeCustomMapSvg
+        ? sanitizeSVG(props.customMapSvg)
+        : props.customMapSvg
       return
     }
 
@@ -209,22 +229,32 @@
 
         if (typeof type == 'object') {
           const fetchData = async () => {
-            const svgUrl = `https://raw.githubusercontent.com/noeGnh/vue3-map-chart/master/packages/vue3-map-chart/src/assets/maps/${type.template}`
+            // Pinned to this exact release (immutable) instead of a mutable
+            // branch, and served through a real CDN rather than raw.githubusercontent.com.
+            const svgUrl = `https://cdn.jsdelivr.net/gh/noeGnh/vue3-map-chart@v${__V3MC_VERSION__}/packages/vue3-map-chart/src/assets/maps/${type.template}`
 
             isLoading.value = true
 
             const response = await fetch(svgUrl)
+            if (!response.ok) {
+              throw new Error(`Failed to fetch map "${type.name}": ${response.status}`)
+            }
 
-            svgMap.value = await response.text()
+            const rawSvg = await response.text()
+            if (!isSVG(rawSvg)) {
+              throw new Error(`Fetched content for map "${type.name}" is not a valid SVG`)
+            }
+
+            svgMap.value = sanitizeSVG(rawSvg)
 
             const cacheData = {
               svg: svgMap.value,
               timestamp: Date.now(),
             }
-            localStorage.setItem(type.name, JSON.stringify(cacheData))
+            localStorage.setItem(mapCacheKey(type.name), JSON.stringify(cacheData))
           }
 
-          const cachedData = localStorage.getItem(type.name)
+          const cachedData = localStorage.getItem(mapCacheKey(type.name))
           if (cachedData) {
             const { svg, timestamp } = JSON.parse(cachedData)
 
@@ -263,11 +293,13 @@
   })
 
   const buildStyles = () => {
-    if (isObject(props.data)) {
+    css.value = ''
+
+    if (isObject(normalizedData.value)) {
       let min: number | undefined
       let max: number | undefined
-      Object.keys(props.data).forEach((key) => {
-        const dataValue = props.data[key]
+      Object.keys(normalizedData.value).forEach((key) => {
+        const dataValue = normalizedData.value[key]
 
         if (typeof dataValue === 'number') {
           if (min === undefined || dataValue < min) {
@@ -290,8 +322,8 @@
         }
       })
 
-      Object.keys(props.data).forEach((key) => {
-        const dataValue = props.data[key]
+      Object.keys(normalizedData.value).forEach((id) => {
+        const dataValue = normalizedData.value[id]
 
         let value, color, opacity
         if (typeof dataValue === 'number') {
@@ -307,10 +339,6 @@
           opacity = (value - min) / (max - min)
           opacity = opacity == 0 ? 0.05 : opacity
         }
-        const id =
-          props.customMapSvg && isSVG(props.customMapSvg)
-            ? key
-            : key.toUpperCase()
         css.value += ` #v3mc-map-${cpntId} #${id} { fill: ${
           color || props.baseColor
         }; fill-opacity: ${opacity}; cursor: ${
@@ -415,9 +443,9 @@
 
   const getAreaName = (id: string) => {
     const customLegendLabel =
-      props.data && props.data[id] && typeof props.data[id] === 'number'
+      normalizedData.value[id] && typeof normalizedData.value[id] === 'number'
         ? undefined
-        : (props.data[id] as MapDataValue)?.legendLabel
+        : (normalizedData.value[id] as MapDataValue)?.legendLabel
 
     const customMapLabel =
       props.customMapLabels && props.customMapLabels[id]
@@ -432,105 +460,117 @@
     return customLegendLabel || customMapLabel || areaName || id
   }
 
-  onMounted(() => {
+  // Labels are rebuilt (not just created once) so they stay in sync when `data`
+  // arrives/changes after mount, when `areaNameOnMap` is toggled, or when the
+  // map SVG itself loads asynchronously (the built-in maps are fetched after mount).
+  const renderAreaLabels = () => {
+    const mapContainer = document.getElementById(`v3mc-map-${cpntId}`)
+    if (!mapContainer) return
+
+    // Clear any labels from a previous run before regenerating them.
+    mapContainer
+      .querySelectorAll('.labels-group')
+      .forEach((group) => group.remove())
+
     if (props.areaNameOnMap == 'none') return
 
     const svgNS = 'http://www.w3.org/2000/svg'
-    const mapContainer = document.getElementById(`v3mc-map-${cpntId}`)
-    if (mapContainer) {
-      const areas: {
-        element: SVGGraphicsElement
-        id: string
-        name: string
-      }[] = Array.from(
-        mapContainer.querySelectorAll<SVGGraphicsElement>('[id]')
+    const areas: {
+      element: SVGGraphicsElement
+      id: string
+      name: string
+    }[] = Array.from(mapContainer.querySelectorAll<SVGGraphicsElement>('[id]'))
+      .filter(
+        (el) =>
+          (((isValidIsoCode(el.id) &&
+            !!(
+              countries.getName(el.id, props.langCode) ||
+              iso3166.subdivision(el.id)?.name
+            )) ||
+            (props.customMapSvg && isSVG(props.customMapSvg))) &&
+            props.areaNameOnMap == 'all') ||
+          Object.keys(normalizedData.value).includes(el.id)
       )
-        .filter(
-          (el) =>
-            (((isValidIsoCode(el.id) &&
-              !!(
-                countries.getName(el.id, props.langCode) ||
-                iso3166.subdivision(el.id)?.name
-              )) ||
-              (props.customMapSvg && isSVG(props.customMapSvg))) &&
-              props.areaNameOnMap == 'all') ||
-            Object.keys(props.data).includes(el.id)
-        )
-        .map((el) => ({
-          element: el,
-          id: el.id,
-          name:
-            countries.getName(el.id, props.langCode) ||
-            iso3166.subdivision(el.id)?.name ||
-            '',
-        }))
+      .map((el) => ({
+        element: el,
+        id: el.id,
+        name:
+          countries.getName(el.id, props.langCode) ||
+          iso3166.subdivision(el.id)?.name ||
+          '',
+      }))
 
-      // Create a group for all labels at the end of each SVG
-      const svgContainers = new Set<SVGSVGElement>()
-      areas.forEach((area) => {
+    // Create a group for all labels at the end of each SVG
+    const svgContainers = new Set<SVGSVGElement>()
+    areas.forEach((area) => {
+      const svg = area.element.ownerSVGElement
+      if (svg) svgContainers.add(svg)
+    })
+
+    // Create a label group per SVG
+    const labelGroups = new Map<SVGSVGElement, SVGGElement>()
+    svgContainers.forEach((svg) => {
+      const group = document.createElementNS(svgNS, 'g')
+      group.setAttribute('class', 'labels-group')
+      svg.appendChild(group)
+      labelGroups.set(svg, group)
+    })
+
+    areas.forEach((area) => {
+      if (!('getBBox' in area.element)) return
+
+      try {
+        // Get the bounding box of the element
+        const bbox = area.element.getBBox()
+
+        // Calculate the center
+        const centerX = bbox.x + bbox.width / 2
+        const centerY = bbox.y + bbox.height / 2
+
+        // Create an SVG text element
+        const textElem = document.createElementNS(svgNS, 'text')
+        textElem.setAttribute('x', centerX.toString())
+        textElem.setAttribute('y', centerY.toString())
+        textElem.setAttribute('text-anchor', 'middle')
+        textElem.setAttribute('dominant-baseline', 'middle')
+        textElem.setAttribute('font-size', `${props.areaNameOnMapSize}`)
+        textElem.setAttribute('fill', `${props.areaNameOnMapColor}`)
+        textElem.setAttribute('pointer-events', 'none')
+        textElem.textContent = getAreaName(area.element.id)
+
+        // Get the label group
         const svg = area.element.ownerSVGElement
-        if (svg) svgContainers.add(svg)
-      })
+        const group = svg ? labelGroups.get(svg) : null
 
-      // Create a label group per SVG
-      const labelGroups = new Map<SVGSVGElement, SVGGElement>()
-      svgContainers.forEach((svg) => {
-        const group = document.createElementNS(svgNS, 'g')
-        group.setAttribute('class', 'labels-group')
-        svg.appendChild(group)
-        labelGroups.set(svg, group)
-      })
+        if (group) {
+          // Add text to DOM first so getBBox() works
+          group.appendChild(textElem)
 
-      areas.forEach((area) => {
-        if (!('getBBox' in area.element)) return
+          // Now get the text bounding box and create background
+          const textBBox = textElem.getBBox()
+          const rectBg = document.createElementNS(svgNS, 'rect')
+          rectBg.setAttribute('x', (textBBox.x - 4).toString())
+          rectBg.setAttribute('y', (textBBox.y - 2).toString())
+          rectBg.setAttribute('width', (textBBox.width + 7).toString())
+          rectBg.setAttribute('height', (textBBox.height + 3).toString())
+          rectBg.setAttribute('fill', `${props.areaNameOnMapBgColor}`)
+          rectBg.setAttribute('stroke-width', '0')
+          rectBg.setAttribute('rx', '3')
+          rectBg.setAttribute('pointer-events', 'none')
 
-        try {
-          // Get the bounding box of the element
-          const bbox = area.element.getBBox()
-
-          // Calculate the center
-          const centerX = bbox.x + bbox.width / 2
-          const centerY = bbox.y + bbox.height / 2
-
-          // Create an SVG text element
-          const textElem = document.createElementNS(svgNS, 'text')
-          textElem.setAttribute('x', centerX.toString())
-          textElem.setAttribute('y', centerY.toString())
-          textElem.setAttribute('text-anchor', 'middle')
-          textElem.setAttribute('dominant-baseline', 'middle')
-          textElem.setAttribute('font-size', `${props.areaNameOnMapSize}`)
-          textElem.setAttribute('fill', `${props.areaNameOnMapColor}`)
-          textElem.setAttribute('pointer-events', 'none')
-          textElem.textContent = getAreaName(area.element.id)
-
-          // Get the label group
-          const svg = area.element.ownerSVGElement
-          const group = svg ? labelGroups.get(svg) : null
-
-          if (group) {
-            // Add text to DOM first so getBBox() works
-            group.appendChild(textElem)
-
-            // Now get the text bounding box and create background
-            const textBBox = textElem.getBBox()
-            const rectBg = document.createElementNS(svgNS, 'rect')
-            rectBg.setAttribute('x', (textBBox.x - 4).toString())
-            rectBg.setAttribute('y', (textBBox.y - 2).toString())
-            rectBg.setAttribute('width', (textBBox.width + 7).toString())
-            rectBg.setAttribute('height', (textBBox.height + 3).toString())
-            rectBg.setAttribute('fill', `${props.areaNameOnMapBgColor}`)
-            rectBg.setAttribute('stroke-width', '0')
-            rectBg.setAttribute('rx', '3')
-            rectBg.setAttribute('pointer-events', 'none')
-
-            // Insert background before text (so text is on top)
-            group.insertBefore(rectBg, textElem)
-          }
-        } catch (_) {
-          //
+          // Insert background before text (so text is on top)
+          group.insertBefore(rectBg, textElem)
         }
-      })
-    }
+      } catch (_) {
+        //
+      }
+    })
+  }
+
+  watch([() => props.areaNameOnMap, () => props.data, svgMap], renderAreaLabels, {
+    deep: true,
+    immediate: true,
+    flush: 'post',
   })
 </script>
 
