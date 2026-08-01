@@ -511,9 +511,14 @@
     })
   }
 
+  // An immediate watcher's first call runs synchronously during setup, before
+  // the component has actually mounted (flush: 'post' only changes the timing
+  // of *subsequent* runs) — so the first render has to go through onMounted
+  // instead, where the container is guaranteed to exist.
+  onMounted(renderAreaLabels)
+
   watch([() => props.areaNameOnMap, () => props.data, svgMap], renderAreaLabels, {
     deep: true,
-    immediate: true,
     flush: 'post',
   })
 </script>
