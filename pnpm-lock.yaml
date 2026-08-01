@@ -165,6 +165,40 @@ importers:
         specifier: ^3.3.8
         version: 3.3.8(typescript@6.0.3)
 
+  packages/playground-react:
+    dependencies:
+      '@arkn/react-map-chart':
+        specifier: workspace:*
+        version: link:../react-map-chart
+      '@arkn/react-map-chart-lite':
+        specifier: workspace:*
+        version: link:../react-map-chart-lite
+      react:
+        specifier: ^19.2.8
+        version: 19.2.8
+      react-dom:
+        specifier: ^19.2.8
+        version: 19.2.8(react@19.2.8)
+    devDependencies:
+      '@types/react':
+        specifier: ^19.2.18
+        version: 19.2.18
+      '@types/react-dom':
+        specifier: ^19.2.4
+        version: 19.2.4(@types/react@19.2.18)
+      '@vitejs/plugin-react':
+        specifier: ^6.0.5
+        version: 6.0.5(vite@8.1.5(@types/node@26.1.2)(esbuild@0.28.1)(terser@5.31.3)(tsx@4.23.1)(yaml@2.9.0))
+      gh-pages:
+        specifier: ^6.3.0
+        version: 6.3.0
+      typescript:
+        specifier: ~6.0.3
+        version: 6.0.3
+      vite:
+        specifier: ^8.1.5
+        version: 8.1.5(@types/node@26.1.2)(esbuild@0.28.1)(terser@5.31.3)(tsx@4.23.1)(yaml@2.9.0)
+
   packages/react-map-chart:
     dependencies:
       '@map-chart/core':

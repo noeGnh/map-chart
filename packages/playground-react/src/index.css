@@ -1,0 +1,52 @@
+body,
+html,
+#app {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 5px;
+  width: 100%;
+  height: 100%;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.big {
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+}
+
+.map-label {
+  margin-bottom: 0.5em;
+  font-size: 1.2em;
+  text-align: center;
+  text-decoration: dotted underline;
+  color: dimgray;
+}
+
+@media (max-width: 1024px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, auto);
+    gap: 10px;
+  }
+
+  .big {
+    grid-column: 1 / 3;
+  }
+}
