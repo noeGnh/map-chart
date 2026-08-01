@@ -2,11 +2,10 @@ import { flushPromises, mount } from '@vue/test-utils'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { h } from 'vue'
 
-// Real SVG from the sibling full package, used as the mocked fetch response
-// so these tests exercise the real isSVG/sanitizeSVG pipeline on real
-// content instead of a hand-rolled fixture. Same relative-import pattern as
-// scripts/generate-svg-map-exports.ts.
-import AfricaMapSvg from '../../../vue3-map-chart/src/assets/maps/continents/africa.svg?raw'
+// Real SVG from @map-chart/core, used as the mocked fetch response so these
+// tests exercise the real isSVG/sanitizeSVG pipeline on real content instead
+// of a hand-rolled fixture — the same source the real fetch pulls from.
+import AfricaMapSvg from '@map-chart/core/assets/maps/continents/africa.svg?raw'
 import MapChart from '../components/MapChart.vue'
 import { V3MC_VERSION } from '../version'
 
@@ -58,7 +57,7 @@ describe('built-in map fetch', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1)
     const [calledUrl] = fetchMock.mock.calls[0] as [string]
     expect(calledUrl).toBe(
-      `https://cdn.jsdelivr.net/gh/noeGnh/vue3-map-chart@v${V3MC_VERSION}/packages/vue3-map-chart/src/assets/maps/continents/africa.svg`
+      `https://cdn.jsdelivr.net/gh/noeGnh/vue3-map-chart@v${V3MC_VERSION}/packages/core/src/assets/maps/continents/africa.svg`
     )
 
     expect(wrapper.find('.v3mc-tiny-loader-wrapper').attributes('style')).toContain(

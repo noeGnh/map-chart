@@ -25,29 +25,25 @@
   "scripts": {
     "dev-server": "pnpm --parallel vite",
     "dev-types": "vue-tsc  --noEmit -p tsconfig.app.json --watch",
-    "build": "pnpm generate:svg-map-exports && pnpm generate:svg-map-list && pnpm build-lib && pnpm build-types",
+    "build": "pnpm generate:svg-map-exports && pnpm build-lib && pnpm build-types",
     "build-lib": "vite build",
     "build-types": "rm -f *.tsbuildinfo && vue-tsc --emitDeclarationOnly --declaration -p tsconfig.app.json",
     "lint": "eslint 'src/**/*.{ts,vue}'",
     "test": "vitest",
     "test-ci": "vitest --run",
     "version": "auto-changelog --template keepachangelog --hide-credit -p && git add CHANGELOG.md",
-    "generate:svg-map-list": "tsx scripts/generate-svg-map-list.ts",
-    "generate:svg-map-type": "tsx scripts/generate-svg-map-type.ts",
-    "generate:svg-map-exports": "tsx scripts/generate-svg-map-exports.ts",
-    "optimize-svgs": "tsx scripts/optimize-svgs.ts"
+    "generate:svg-map-exports": "tsx scripts/generate-svg-map-exports.ts"
   },
   "peerDependencies": {
     "vue": "^3.4.0"
   },
   "devDependencies": {
-    "@types/iso-3166-2": "^1.0.4",
     "@types/jsdom": "^28.0.3",
     "@types/node": "^26.1.2",
     "auto-changelog": "^2.6.0",
     "fast-glob": "^3.3.3",
+    "i18n-iso-countries": "^7.14.0",
     "rollup-plugin-visualizer": "^7.0.1",
-    "svgo": "^4.0.2",
     "tsx": "^4.23.1",
     "vite": "^8.1.5",
     "vite-svg-loader": "^5.1.1",
@@ -87,9 +83,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@vueuse/core": "^14.3.0",
-    "dompurify": "^3.4.12",
-    "i18n-iso-countries": "^7.14.0",
-    "iso-3166-2": "^1.0.0"
+    "@map-chart/core": "workspace:*",
+    "@vueuse/core": "^14.3.0"
   }
 }

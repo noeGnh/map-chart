@@ -1,0 +1,39 @@
+{
+  "name": "@map-chart/core",
+  "description": "Framework-agnostic core (maps, coloring, sanitization, tooltip/label logic, lite fetch+cache) shared by the Vue and React map-chart packages. Not published.",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./maps": "./src/maps.ts",
+    "./assets/*": "./src/assets/*",
+    "./*": "./*"
+  },
+  "scripts": {
+    "lint": "eslint 'src/**/*.ts'",
+    "test": "vitest",
+    "test-ci": "vitest --run",
+    "generate:svg-map-exports": "tsx scripts/generate-svg-map-exports.ts",
+    "generate:svg-map-list": "tsx scripts/generate-svg-map-list.ts",
+    "generate:svg-map-type": "tsx scripts/generate-svg-map-type.ts",
+    "optimize-svgs": "tsx scripts/optimize-svgs.ts"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "@types/iso-3166-2": "^1.0.4",
+    "@types/jsdom": "^28.0.3",
+    "fast-glob": "^3.3.3",
+    "svgo": "^4.0.2",
+    "tsx": "^4.23.1",
+    "vite": "^8.1.5",
+    "vitest": "^4.1.10"
+  },
+  "dependencies": {
+    "dompurify": "^3.4.12",
+    "i18n-iso-countries": "^7.14.0",
+    "iso-3166-2": "^1.0.0"
+  }
+}

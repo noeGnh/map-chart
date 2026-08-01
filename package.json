@@ -1,7 +1,7 @@
 {
-  "name": "vue3-map-chart-monorepo",
+  "name": "map-chart-monorepo",
   "version": "0.0.1",
-  "description": "A monorepo template for developing Vue libraries",
+  "description": "A monorepo for developing the map-chart component libraries",
   "author": "Noé Gnanih <noegnanih@gmail.com>",
   "license": "MIT",
   "private": true,
@@ -12,8 +12,8 @@
   "scripts": {
     "docs": "pnpm -F docs run dev",
     "dev": "pnpm -F playground run dev",
-    "test": "pnpm -F vue3-map-chart -F vue3-map-chart-lite run test",
-    "test-ci": "pnpm -F vue3-map-chart -F vue3-map-chart-lite run test-ci",
+    "test": "pnpm -F '@map-chart/core' -F vue3-map-chart -F vue3-map-chart-lite run test",
+    "test-ci": "pnpm -F '@map-chart/core' -F vue3-map-chart -F vue3-map-chart-lite run test-ci",
     "build": "pnpm build-plugin && pnpm build-plugin-lite && pnpm build-playground && pnpm build-docs",
     "build-plugin": "pnpm -r -F vue3-map-chart run build",
     "build-plugin-lite": "pnpm -r -F vue3-map-chart-lite run build",

@@ -3,7 +3,7 @@ import countries from 'i18n-iso-countries'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { h, nextTick } from 'vue'
 
-import AfricaMap from '../assets/maps/continents/africa.svg?raw'
+import AfricaMap from '@map-chart/core/assets/maps/continents/africa.svg?raw'
 import MapChart from '../components/MapChart.vue'
 
 // Africa map ships real ISO alpha-2 ids, e.g. #EG (Egypt), used below to

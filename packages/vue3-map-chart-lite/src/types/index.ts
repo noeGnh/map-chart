@@ -1,2 +1,2 @@
-export * from './map-data'
+export * from '@map-chart/core'
 export * from './options'

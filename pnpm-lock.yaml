@@ -90,6 +90,40 @@ importers:
         specifier: ^3.3.8
         version: 3.3.8(typescript@6.0.3)
 
+  packages/core:
+    dependencies:
+      dompurify:
+        specifier: ^3.4.12
+        version: 3.4.12
+      i18n-iso-countries:
+        specifier: ^7.14.0
+        version: 7.14.0
+      iso-3166-2:
+        specifier: ^1.0.0
+        version: 1.0.0
+    devDependencies:
+      '@types/iso-3166-2':
+        specifier: ^1.0.4
+        version: 1.0.4
+      '@types/jsdom':
+        specifier: ^28.0.3
+        version: 28.0.3
+      fast-glob:
+        specifier: ^3.3.3
+        version: 3.3.3
+      svgo:
+        specifier: ^4.0.2
+        version: 4.0.2
+      tsx:
+        specifier: ^4.23.1
+        version: 4.23.1
+      vite:
+        specifier: ^8.1.5
+        version: 8.1.5(@types/node@26.1.2)(esbuild@0.28.1)(terser@5.31.3)(tsx@4.23.1)(yaml@2.9.0)
+      vitest:
+        specifier: ^4.1.10
+        version: 4.1.10(@types/node@26.1.2)(jsdom@30.0.1)(vite@8.1.5(@types/node@26.1.2)(esbuild@0.28.1)(terser@5.31.3)(tsx@4.23.1)(yaml@2.9.0))
+
   packages/docs:
     dependencies:
       vue3-map-chart:
@@ -130,25 +164,16 @@ importers:
 
   packages/vue3-map-chart:
     dependencies:
+      '@map-chart/core':
+        specifier: workspace:*
+        version: link:../core
       '@vueuse/core':
         specifier: ^14.3.0
         version: 14.3.0(vue@3.5.40(typescript@6.0.3))
-      dompurify:
-        specifier: ^3.4.12
-        version: 3.4.12
-      i18n-iso-countries:
-        specifier: ^7.14.0
-        version: 7.14.0
-      iso-3166-2:
-        specifier: ^1.0.0
-        version: 1.0.0
       vue:
         specifier: ^3.4.0
         version: 3.5.40(typescript@6.0.3)
     devDependencies:
-      '@types/iso-3166-2':
-        specifier: ^1.0.4
-        version: 1.0.4
       '@types/jsdom':
         specifier: ^28.0.3
         version: 28.0.3
@@ -161,12 +186,12 @@ importers:
       fast-glob:
         specifier: ^3.3.3
         version: 3.3.3
+      i18n-iso-countries:
+        specifier: ^7.14.0
+        version: 7.14.0
       rollup-plugin-visualizer:
         specifier: ^7.0.1
         version: 7.0.1(rolldown@1.1.5)(rollup@4.57.1)
-      svgo:
-        specifier: ^4.0.2
-        version: 4.0.2
       tsx:
         specifier: ^4.23.1
         version: 4.23.1
@@ -182,34 +207,25 @@ importers:
 
   packages/vue3-map-chart-lite:
     dependencies:
+      '@map-chart/core':
+        specifier: workspace:*
+        version: link:../core
       '@vueuse/core':
         specifier: ^14.3.0
         version: 14.3.0(vue@3.5.40(typescript@6.0.3))
-      dompurify:
-        specifier: ^3.4.12
-        version: 3.4.12
-      i18n-iso-countries:
-        specifier: ^7.14.0
-        version: 7.14.0
-      iso-3166-2:
-        specifier: ^1.0.0
-        version: 1.0.0
       vue:
         specifier: ^3.4.0
         version: 3.5.40(typescript@6.0.3)
     devDependencies:
-      '@types/iso-3166-2':
-        specifier: ^1.0.4
-        version: 1.0.4
       '@types/jsdom':
         specifier: ^28.0.3
         version: 28.0.3
       auto-changelog:
         specifier: ^2.6.0
         version: 2.6.0
-      fast-glob:
-        specifier: ^3.3.3
-        version: 3.3.3
+      i18n-iso-countries:
+        specifier: ^7.14.0
+        version: 7.14.0
       rollup-plugin-visualizer:
         specifier: ^7.0.1
         version: 7.0.1(rolldown@1.1.5)(rollup@4.57.1)

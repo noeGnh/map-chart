@@ -1,45 +1,33 @@
-// scripts/generate-index.ts
+// scripts/generate-svg-map-exports.ts
+//
+// Unlike @map-chart/core's own generator (which produces lightweight
+// { name, template } descriptors), this package bundles the actual maps, so
+// it turns @map-chart/core's source SVGs into `?raw` imports that get
+// inlined into this package's own build.
 import fg from 'fast-glob'
-import { mkdirSync, writeFileSync } from 'fs'
-import { basename, dirname, relative } from 'path'
+import { writeFileSync } from 'fs'
+import { basename, relative } from 'path'
 
 async function run() {
-  const files = (await fg('src/assets/maps/**/*.svg')).sort()
+  const files = (await fg('../core/src/assets/maps/**/*.svg')).sort()
 
   const names = files.map((file) => basename(file).replace(/\.svg$/, ''))
-
   const uniqueNames = Array.from(new Set(names)).sort()
 
-  // Generate direct exports for tree shaking
   const directExports = files
     .map((file) => {
       const fileName = basename(file).replace(/\.svg$/, '')
-      const relativePath = './' + relative('src', file).replace(/\\/g, '/')
+      const relativePath = relative('../core/src/assets/maps', file).replace(
+        /\\/g,
+        '/'
+      )
       return `export { default as ${
         toPascalCase(fileName) + 'Map'
-      } } from '${relativePath}?raw'`
+      } } from '@map-chart/core/assets/maps/${relativePath}?raw'`
     })
     .join('\n')
 
-  // Generate path mapping for plugin
-  /* const pathMapping = files
-    .map((file) => {
-      const fileName = basename(file).replace(/\.svg$/, '')
-      const relativePath = relative('src/assets/maps', file).replace(/\\/g, '/')
-      const pascalName = toPascalCase(fileName)
-      return `  ${pascalName}: '${relativePath}',`
-    })
-    .join('\n') */
-
-  // Generate maps.ts file
-  /* const mapsContent = `// Auto-generated maps file
-// Map of component names to their file paths
-export const mapPaths: Record<string, string> = {
-${pathMapping}
-}
-` */
-
-  const indexContent = `// Auto-generated index file
+  const indexContent = `// Auto-generated index file, run \`pnpm generate:svg-map-exports\`.
 import MapChart from './components/MapChart.vue'
 
 // Export MapChart component
@@ -53,14 +41,7 @@ export { default as plugin } from './plugin'
 export { default } from './plugin'
 `
 
-  const indexOutputPath = 'src/index.ts'
-  // const mapsOutputPath = 'src/maps.ts'
-
-  mkdirSync(dirname(indexOutputPath), { recursive: true })
-  // mkdirSync(dirname(mapsOutputPath), { recursive: true })
-
-  writeFileSync(indexOutputPath, indexContent)
-  // writeFileSync(mapsOutputPath, mapsContent)
+  writeFileSync('src/index.ts', indexContent)
 
   console.log(`✅ index.ts generated with ${uniqueNames.length} map exports.`)
 }

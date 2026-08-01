@@ -1,25 +1,27 @@
 <script setup lang="ts">
   import type { MapData, MapDataValue } from '@/types'
   import {
+    buildMapStyleCss,
+    computeTooltipLabel,
+    computeTooltipPosition,
+    computeTooltipValue,
+    getNextInstanceId,
+    isSVG,
+    normalizeMapData,
+    registerLocale,
+    renderAreaLabels,
+    resolveAreaEvent,
+    resolveCustomMapSvg,
+  } from '@map-chart/core'
+  import {
     useElementBounding,
     useEventListener,
     useMouse,
     useMouseInElement,
     useStyleTag,
   } from '@vueuse/core'
-  import countries from 'i18n-iso-countries'
-  import iso3166 from 'iso-3166-2'
   import type { CSSProperties } from 'vue'
 
-  import locales from '../i18n-iso-countries-locales'
-  import {
-    formatNumberWithSIPrefix,
-    getNextInstanceId,
-    isObject,
-    isSVG,
-    isValidIsoCode,
-    sanitizeSVG,
-  } from '../utils'
   import Tooltip from './Tooltip.vue'
 
   // handle props
@@ -81,14 +83,6 @@
     customMapLabels: () => ({}),
   })
 
-  const registerLocale = async (langCode: string) => {
-    try {
-      if (locales[langCode]) countries.registerLocale(locales[langCode])
-    } catch (error) {
-      console.error('Error loading locale:', error)
-    }
-  }
-
   watch(() => props.langCode, registerLocale, { immediate: true })
 
   const mapHeight = computed(() =>
@@ -118,19 +112,13 @@
   })
 
   const cpntId = getNextInstanceId()
+  const containerId = `v3mc-map-${cpntId}`
 
-  // props.data keyed exactly as the SVG element ids expect it: uppercase ISO
-  // codes for built-in maps (so `data: { fr: 1 }` behaves like `{ FR: 1 }`),
-  // untouched for a customMapSvg where ids are whatever the author chose.
-  const normalizedData = computed<MapData>(() => {
-    if (props.customMapSvg && isSVG(props.customMapSvg)) return props.data
+  const isCustomSvg = computed(() => !!(props.customMapSvg && isSVG(props.customMapSvg)))
 
-    const result: MapData = {}
-    Object.keys(props.data).forEach((key) => {
-      result[key.toUpperCase()] = props.data[key]
-    })
-    return result
-  })
+  const normalizedData = computed<MapData>(() =>
+    normalizeMapData(props.data, isCustomSvg.value)
+  )
 
   // handle events
 
@@ -146,7 +134,7 @@
   ])
 
   onMounted(() => {
-    const el = document.getElementById(`v3mc-map-${cpntId}`)
+    const el = document.getElementById(containerId)
     if (el) {
       const emitEvent = (
         target: HTMLElement,
@@ -156,19 +144,16 @@
           | 'mapItemClick'
           | 'mapItemTouchstart'
       ) => {
-        const id = target.getAttribute('id')
-        currentAreaId.value = id
-        currentAreaValue.value = id ? normalizedData.value[id] : null
-        if (
-          (id &&
-            isValidIsoCode(id) &&
-            !!(
-              countries.getName(id, props.langCode) ||
-              iso3166.subdivision(id)?.name
-            )) ||
-          (props.customMapSvg && isSVG(props.customMapSvg))
-        ) {
-          emits(emitId, id, currentAreaValue.value)
+        const resolved = resolveAreaEvent(target, {
+          data: normalizedData.value,
+          langCode: props.langCode,
+          isCustomSvg: isCustomSvg.value,
+        })
+        currentAreaId.value = resolved.id
+        currentAreaValue.value = resolved.value
+
+        if (resolved.isValidArea) {
+          emits(emitId, resolved.id, resolved.value)
           if (emitId == 'mapItemTouchstart') {
             isOutsideMap.value = false
           }
@@ -205,11 +190,12 @@
   const svgMap = ref<string | null>(null)
 
   const loadSvgMap = async (): Promise<void> => {
-    if (props.customMapSvg && isSVG(props.customMapSvg)) {
-      svgMap.value = props.sanitizeCustomMapSvg
-        ? sanitizeSVG(props.customMapSvg)
-        : props.customMapSvg
-      return
+    if (props.customMapSvg) {
+      const resolved = resolveCustomMapSvg(props.customMapSvg, props.sanitizeCustomMapSvg)
+      if (resolved !== null) {
+        svgMap.value = resolved
+        return
+      }
     }
 
     if (slots.default) {
@@ -233,66 +219,15 @@
   // build map styles
 
   const { css } = useStyleTag('', {
-    id: `v3mc-map-${cpntId}-styles`,
+    id: `${containerId}-styles`,
   })
 
   const buildStyles = () => {
-    css.value = ''
-
-    if (isObject(normalizedData.value)) {
-      let min: number | undefined
-      let max: number | undefined
-      Object.keys(normalizedData.value).forEach((key) => {
-        const dataValue = normalizedData.value[key]
-
-        if (typeof dataValue === 'number') {
-          if (min === undefined || dataValue < min) {
-            min = dataValue
-          }
-
-          if (max === undefined || dataValue > max) {
-            max = dataValue
-          }
-        } else if (isObject(dataValue)) {
-          const value = dataValue?.value || 0
-
-          if (min === undefined || value < min) {
-            min = value
-          }
-
-          if (max === undefined || value > max) {
-            max = value
-          }
-        }
-      })
-
-      Object.keys(normalizedData.value).forEach((id) => {
-        const dataValue = normalizedData.value[id]
-
-        let value, color, opacity
-        if (typeof dataValue === 'number') {
-          value = dataValue
-        } else if (isObject(dataValue)) {
-          value = dataValue?.value
-          color = dataValue?.color
-        }
-
-        if (value === undefined || max === undefined || min === undefined) {
-          opacity = 1
-        } else {
-          opacity = (value - min) / (max - min)
-          opacity = opacity == 0 ? 0.05 : opacity
-        }
-        css.value += ` #v3mc-map-${cpntId} #${id} { fill: ${
-          color || props.baseColor
-        }; fill-opacity: ${opacity}; cursor: ${
-          props.displayLegend ? 'pointer' : 'default'
-        }; } `
-        css.value += ` #v3mc-map-${cpntId} #${id}:hover { fill-opacity: ${
-          opacity + 0.05
-        }; } `
-      })
-    }
+    css.value = buildMapStyleCss(normalizedData.value, {
+      containerId,
+      baseColor: props.baseColor,
+      displayLegend: props.displayLegend,
+    })
   }
 
   watch(
@@ -305,44 +240,23 @@
 
   // tooltip
 
-  const tooltipLabel = computed(() => {
-    const customLegendLabel =
-      typeof currentAreaValue.value === 'number'
-        ? undefined
-        : currentAreaValue.value?.legendLabel
+  const tooltipLabel = computed(() =>
+    computeTooltipLabel({
+      areaId: currentAreaId.value,
+      areaValue: currentAreaValue.value,
+      langCode: props.langCode,
+      customMapLabels: props.customMapLabels,
+    })
+  )
 
-    const customMapLabel =
-      props.customMapLabels &&
-      currentAreaId.value &&
-      props.customMapLabels[currentAreaId.value]
-        ? props.customMapLabels[currentAreaId.value]
-        : undefined
-
-    const areaName = currentAreaId.value
-      ? countries.getName(currentAreaId.value, props.langCode) ||
-        iso3166.subdivision(currentAreaId.value)?.name ||
-        currentAreaId.value
-      : currentAreaId.value
-
-    return customLegendLabel || customMapLabel || areaName || ''
-  })
-
-  const tooltipValue = computed(() => {
-    let value: number | string =
-      (typeof currentAreaValue.value === 'number'
-        ? currentAreaValue.value
-        : currentAreaValue.value?.value) || ''
-
-    if (typeof value !== 'number') return value
-
-    value = props.formatValueWithSiPrefix
-      ? formatNumberWithSIPrefix(value)
-      : value
-
-    value = props.legendValuePrefix + value + props.legendValueSuffix
-
-    return value
-  })
+  const tooltipValue = computed(() =>
+    computeTooltipValue({
+      areaValue: currentAreaValue.value,
+      formatValueWithSiPrefix: props.formatValueWithSiPrefix,
+      legendValuePrefix: props.legendValuePrefix,
+      legendValueSuffix: props.legendValueSuffix,
+    })
+  )
 
   const displayTooltip = computed(() => {
     return (
@@ -359,155 +273,40 @@
     tooltip as any
   )
 
-  const tooltipLeft = computed(() => {
-    const viewportMouseX = mouseX.value - window.scrollX
+  const tooltipPosition = computed(() =>
+    computeTooltipPosition({
+      mouseX: mouseX.value,
+      mouseY: mouseY.value,
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+      tooltipWidth: tooltipWidth.value,
+      tooltipHeight: tooltipHeight.value,
+      viewportWidth: window.innerWidth,
+      viewportHeight: window.innerHeight,
+    })
+  )
 
-    let left = viewportMouseX + 12
-
-    if (left + tooltipWidth.value > window.innerWidth) {
-      left = viewportMouseX - tooltipWidth.value - 12
-    }
-
-    return `${left}px`
-  })
-
-  const tooltipTop = computed(() => {
-    const viewportMouseY = mouseY.value - window.scrollY
-
-    let top = viewportMouseY + 12
-
-    if (top + tooltipHeight.value > window.innerHeight) {
-      top = viewportMouseY - tooltipHeight.value - 12
-    }
-
-    return `${top}px`
-  })
+  const tooltipLeft = computed(() => tooltipPosition.value.left)
+  const tooltipTop = computed(() => tooltipPosition.value.top)
 
   // Dynamically Display area name on map
-
-  const getAreaName = (id: string) => {
-    const customLegendLabel =
-      normalizedData.value[id] && typeof normalizedData.value[id] === 'number'
-        ? undefined
-        : (normalizedData.value[id] as MapDataValue)?.legendLabel
-
-    const customMapLabel =
-      props.customMapLabels && props.customMapLabels[id]
-        ? props.customMapLabels[id]
-        : undefined
-
-    const areaName =
-      countries.getName(id, props.langCode) ||
-      iso3166.subdivision(id)?.name ||
-      id
-
-    return customLegendLabel || customMapLabel || areaName || id
-  }
 
   // Labels are rebuilt (not just created once) so they stay in sync when `data`
   // arrives/changes after mount, when `areaNameOnMap` is toggled, or when the
   // map SVG itself loads asynchronously (vue3-map-chart-lite fetches it after mount).
-  const renderAreaLabels = () => {
-    const mapContainer = document.getElementById(`v3mc-map-${cpntId}`)
+  const renderLabels = () => {
+    const mapContainer = document.getElementById(containerId)
     if (!mapContainer) return
 
-    // Clear any labels from a previous run before regenerating them.
-    mapContainer
-      .querySelectorAll('.labels-group')
-      .forEach((group) => group.remove())
-
-    if (props.areaNameOnMap == 'none') return
-
-    const svgNS = 'http://www.w3.org/2000/svg'
-    const areas: {
-      element: SVGGraphicsElement
-      id: string
-      name: string
-    }[] = Array.from(mapContainer.querySelectorAll<SVGGraphicsElement>('[id]'))
-      .filter(
-        (el) =>
-          (((isValidIsoCode(el.id) &&
-            !!(
-              countries.getName(el.id, props.langCode) ||
-              iso3166.subdivision(el.id)?.name
-            )) ||
-            (props.customMapSvg && isSVG(props.customMapSvg))) &&
-            props.areaNameOnMap == 'all') ||
-          Object.keys(normalizedData.value).includes(el.id)
-      )
-      .map((el) => ({
-        element: el,
-        id: el.id,
-        name:
-          countries.getName(el.id, props.langCode) ||
-          iso3166.subdivision(el.id)?.name ||
-          '',
-      }))
-
-    // Create a group for all labels at the end of each SVG
-    const svgContainers = new Set<SVGSVGElement>()
-    areas.forEach((area) => {
-      const svg = area.element.ownerSVGElement
-      if (svg) svgContainers.add(svg)
-    })
-
-    // Create a label group per SVG
-    const labelGroups = new Map<SVGSVGElement, SVGGElement>()
-    svgContainers.forEach((svg) => {
-      const group = document.createElementNS(svgNS, 'g')
-      group.setAttribute('class', 'labels-group')
-      svg.appendChild(group)
-      labelGroups.set(svg, group)
-    })
-
-    areas.forEach((area) => {
-      if (!('getBBox' in area.element)) return
-
-      try {
-        // Get the bounding box of the element
-        const bbox = area.element.getBBox()
-
-        // Calculate the center
-        const centerX = bbox.x + bbox.width / 2
-        const centerY = bbox.y + bbox.height / 2
-
-        // Create an SVG text element
-        const textElem = document.createElementNS(svgNS, 'text')
-        textElem.setAttribute('x', centerX.toString())
-        textElem.setAttribute('y', centerY.toString())
-        textElem.setAttribute('text-anchor', 'middle')
-        textElem.setAttribute('dominant-baseline', 'middle')
-        textElem.setAttribute('font-size', `${props.areaNameOnMapSize}`)
-        textElem.setAttribute('fill', `${props.areaNameOnMapColor}`)
-        textElem.setAttribute('pointer-events', 'none')
-        textElem.textContent = getAreaName(area.element.id)
-
-        // Get the label group
-        const svg = area.element.ownerSVGElement
-        const group = svg ? labelGroups.get(svg) : null
-
-        if (group) {
-          // Add text to DOM first so getBBox() works
-          group.appendChild(textElem)
-
-          // Now get the text bounding box and create background
-          const textBBox = textElem.getBBox()
-          const rectBg = document.createElementNS(svgNS, 'rect')
-          rectBg.setAttribute('x', (textBBox.x - 4).toString())
-          rectBg.setAttribute('y', (textBBox.y - 2).toString())
-          rectBg.setAttribute('width', (textBBox.width + 7).toString())
-          rectBg.setAttribute('height', (textBBox.height + 3).toString())
-          rectBg.setAttribute('fill', `${props.areaNameOnMapBgColor}`)
-          rectBg.setAttribute('stroke-width', '0')
-          rectBg.setAttribute('rx', '3')
-          rectBg.setAttribute('pointer-events', 'none')
-
-          // Insert background before text (so text is on top)
-          group.insertBefore(rectBg, textElem)
-        }
-      } catch (_) {
-        //
-      }
+    renderAreaLabels(mapContainer, {
+      areaNameOnMap: props.areaNameOnMap,
+      data: normalizedData.value,
+      langCode: props.langCode,
+      isCustomSvg: isCustomSvg.value,
+      customMapLabels: props.customMapLabels,
+      areaNameOnMapSize: props.areaNameOnMapSize,
+      areaNameOnMapColor: props.areaNameOnMapColor,
+      areaNameOnMapBgColor: props.areaNameOnMapBgColor,
     })
   }
 
@@ -515,9 +314,9 @@
   // the component has actually mounted (flush: 'post' only changes the timing
   // of *subsequent* runs) — so the first render has to go through onMounted
   // instead, where the container is guaranteed to exist.
-  onMounted(renderAreaLabels)
+  onMounted(renderLabels)
 
-  watch([() => props.areaNameOnMap, () => props.data, svgMap], renderAreaLabels, {
+  watch([() => props.areaNameOnMap, () => props.data, svgMap], renderLabels, {
     deep: true,
     flush: 'post',
   })
@@ -526,7 +325,7 @@
 <template>
   <div class="v3mc-container">
     <div
-      :id="`v3mc-map-${cpntId}`"
+      :id="containerId"
       class="v3mc-map"
       :style="mapStyles"
       v-html="svgMap"></div>

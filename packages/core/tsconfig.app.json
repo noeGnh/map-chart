@@ -1,0 +1,16 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": ["src/**/*", "src/types/**/*", "*.d.ts"],
+  "exclude": ["src/**/__tests__/*"],
+  "compilerOptions": {
+    "lib": ["ES2019", "DOM"],
+    "composite": true,
+    "allowJs": true,
+    "baseUrl": ".",
+    "rootDir": "src",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "ignoreDeprecations": "6.0"
+  }
+}

@@ -8,6 +8,13 @@
     {
       "path": "./tsconfig.config.json"
     },
+    // Core
+    {
+      "path": "./packages/core/tsconfig.app.json"
+    },
+    {
+      "path": "./packages/core/tsconfig.vitest.json"
+    },
     // Plugin
     {
       "path": "./packages/vue3-map-chart/tsconfig.app.json"
