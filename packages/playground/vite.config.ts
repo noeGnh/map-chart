@@ -6,7 +6,7 @@ import SvgLoader from 'vite-svg-loader'
 
 process.env.NODE_ENV
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/vue3-map-chart' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/map-chart' : '/',
   plugins: [
     vue(),
     /* visualizer({

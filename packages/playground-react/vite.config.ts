@@ -2,7 +2,7 @@ import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/vue3-map-chart' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/map-chart' : '/',
   plugins: [react()],
   resolve: {
     alias: {
