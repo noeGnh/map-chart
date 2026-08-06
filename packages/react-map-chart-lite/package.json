@@ -54,7 +54,7 @@
     "react-dom": "^19.2.8",
     "rollup-plugin-visualizer": "^7.0.1",
     "tsx": "^4.23.5",
-    "typescript": "~6.0.3",
+    "typescript": "~7.0.2",
     "vite": "^8.1.5",
     "vitest": "^4.1.10"
   },
