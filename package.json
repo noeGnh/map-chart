@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "docs": "pnpm -F docs run dev",
-    "dev": "pnpm -F playground run dev",
+    "dev": "pnpm -F playground-vue run dev",
     "dev-react": "pnpm -F playground-react run dev",
     "test": "pnpm -F '@map-chart/core' -F vue3-map-chart -F vue3-map-chart-lite -F '@arkn/react-map-chart' -F '@arkn/react-map-chart-lite' run test",
     "test-ci": "pnpm -F '@map-chart/core' -F vue3-map-chart -F vue3-map-chart-lite -F '@arkn/react-map-chart' -F '@arkn/react-map-chart-lite' run test-ci",
@@ -20,7 +20,7 @@
     "build-plugin-lite": "pnpm -r -F vue3-map-chart-lite run build",
     "build-plugin-react": "pnpm -r -F '@arkn/react-map-chart' run build",
     "build-plugin-react-lite": "pnpm -r -F '@arkn/react-map-chart-lite' run build",
-    "build-playground": "pnpm -F playground run build",
+    "build-playground": "pnpm -F playground-vue run build",
     "build-playground-react": "pnpm -F playground-react run build",
     "build-docs": "pnpm -F docs run build",
     "lint": "eslint --ext .js,.ts,.vue,.tsx .",
@@ -29,7 +29,7 @@
     "commit": "git add --all && git commit",
     "commit-push": "git add --all && git commit && git push origin --all",
     "execute-husky": "npx husky install && npx husky add .husky/pre-commit \"npx --no-install lint-staged\"",
-    "deploy-playground": "pnpm -F playground run deploy"
+    "deploy-playground": "pnpm -F playground-vue run deploy"
   },
   "husky": {
     "hooks": {

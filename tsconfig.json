@@ -43,7 +43,7 @@
     },
     // Playground
     {
-      "path": "./packages/playground/tsconfig.app.json"
+      "path": "./packages/playground-vue/tsconfig.app.json"
     },
     {
       "path": "./packages/playground-react/tsconfig.app.json"

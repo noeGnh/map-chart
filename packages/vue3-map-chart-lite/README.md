@@ -32,7 +32,7 @@ pnpm add vue3-map-chart # or: pnpm add vue3-map-chart-lite
 
 ## Demo
 
-View the live demo [`here`](https://noegnh.github.io/vue3-map-chart/) and demo source code [`here`](https://github.com/noeGnh/vue3-map-chart/blob/master/packages/playground/).
+View the live demo [`here`](https://noegnh.github.io/vue3-map-chart/) and demo source code [`here`](https://github.com/noeGnh/vue3-map-chart/blob/master/packages/playground-vue/).
 
 ## Usage
 

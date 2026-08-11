@@ -65,7 +65,7 @@ Full prop/event reference, custom SVG maps, and more examples are in each packag
 
 ## Demo
 
-- Vue: [live demo](https://noegnh.github.io/vue3-map-chart/) — [source](packages/playground)
+- Vue: [live demo](https://noegnh.github.io/vue3-map-chart/) — [source](packages/playground-vue)
 - React: [source](packages/playground-react) (run `pnpm dev-react` locally)
 
 ## Repository layout
@@ -79,7 +79,7 @@ packages/
   vue3-map-chart-lite/    Vue, lite
   react-map-chart/        React, full
   react-map-chart-lite/   React, lite
-  playground/             Vue demo app
+  playground-vue/         Vue demo app
   playground-react/       React demo app
   docs/                   VitePress docs site
 ```
