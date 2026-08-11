@@ -3,7 +3,7 @@
 A React component for displaying dynamic data on a world, continents and countries maps.
 
 <p align="center">
-<img width="600" alt="Demo GIF" src="https://github.com/noeGnh/vue3-map-chart/blob/master/demo.gif"/>
+<img width="600" alt="Demo GIF" src="https://github.com/noeGnh/map-chart/blob/master/demo.gif"/>
 </p>
 
 ## Installation
@@ -30,7 +30,7 @@ pnpm add @arkn/react-map-chart # or: pnpm add @arkn/react-map-chart-lite
 
 ## Demo
 
-View the live demo [`here`](https://noegnh.github.io/vue3-map-chart/) and demo source code [`here`](https://github.com/noeGnh/vue3-map-chart/blob/master/packages/playground-react/).
+View the live demo [`here`](https://noegnh.github.io/map-chart/) and demo source code [`here`](https://github.com/noeGnh/map-chart/blob/master/packages/playground-react/).
 
 ## Usage
 
@@ -41,7 +41,7 @@ import { MapChart, AfricaMap, AsiaMap, BrazilMap, EgyptMap, EuropeMap, NorthAmer
 import '@arkn/react-map-chart/dist/style.css'
 ```
 
-Map list can be found [`here`](https://github.com/noeGnh/vue3-map-chart/blob/master/packages/core/map-list.txt)
+Map list can be found [`here`](https://github.com/noeGnh/map-chart/blob/master/packages/core/map-list.txt)
 
 This component is most useful for creating heat maps of countries and their subdivisions. It colors each country or subdivision differently based on the props provided.
 
@@ -199,8 +199,8 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## Changelog
 
-Detailed changes for each release are documented in the [release notes](https://github.com/noeGnh/vue3-map-chart/releases).
+Detailed changes for each release are documented in the [release notes](https://github.com/noeGnh/map-chart/releases).
 
 ## License
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/noeGnh/vue3-map-chart/blob/master/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/noeGnh/map-chart/blob/master/LICENSE)

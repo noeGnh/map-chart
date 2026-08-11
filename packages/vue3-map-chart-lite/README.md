@@ -3,7 +3,7 @@
 A Vue JS Component for displaying dynamic data on a world, continents and countries maps.
 
 <p align="center">
-<img width="600" alt="Demo GIF" src="https://github.com/noeGnh/vue3-map-chart/blob/master/demo.gif"/>
+<img width="600" alt="Demo GIF" src="https://github.com/noeGnh/map-chart/blob/master/demo.gif"/>
 </p>
 
 ## Installation
@@ -32,7 +32,7 @@ pnpm add vue3-map-chart # or: pnpm add vue3-map-chart-lite
 
 ## Demo
 
-View the live demo [`here`](https://noegnh.github.io/vue3-map-chart/) and demo source code [`here`](https://github.com/noeGnh/vue3-map-chart/blob/master/packages/playground-vue/).
+View the live demo [`here`](https://noegnh.github.io/map-chart/) and demo source code [`here`](https://github.com/noeGnh/map-chart/blob/master/packages/playground-vue/).
 
 ## Usage
 
@@ -65,7 +65,7 @@ createApp(App)
   .mount('#app')
 ```
 
-Map list can be found [`here`](https://github.com/noeGnh/vue3-map-chart/blob/master/packages/vue3-map-chart/map-list.txt)
+Map list can be found [`here`](https://github.com/noeGnh/map-chart/blob/master/packages/core/map-list.txt)
 
 Alternatively you can also import the components locally:
 
@@ -249,8 +249,8 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## Changelog
 
-Detailed changes for each release are documented in the [release notes](https://github.com/noeGnh/vue3-map-chart/releases).
+Detailed changes for each release are documented in the [release notes](https://github.com/noeGnh/map-chart/releases).
 
 ## License
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/noeGnh/vue3-map-chart/blob/master/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/noeGnh/map-chart/blob/master/LICENSE)

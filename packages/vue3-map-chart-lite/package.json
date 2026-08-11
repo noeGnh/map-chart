@@ -50,7 +50,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/noeGnh/vue3-map-chart.git"
+    "url": "git+https://github.com/noeGnh/map-chart.git"
   },
   "keywords": [
     "vue",
@@ -75,9 +75,9 @@
     "custom-map"
   ],
   "bugs": {
-    "url": "https://github.com/noeGnh/vue3-map-chart/issues"
+    "url": "https://github.com/noeGnh/map-chart/issues"
   },
-  "homepage": "https://github.com/noeGnh/vue3-map-chart#readme",
+  "homepage": "https://github.com/noeGnh/map-chart#readme",
   "publishConfig": {
     "access": "public"
   }

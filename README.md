@@ -3,7 +3,7 @@
 Drop-in components for displaying dynamic data on world, continent, and country maps — no D3, no topojson, no geo knowledge required. Available for both Vue 3 and React.
 
 <p align="center">
-<img width="600" alt="Demo GIF" src="https://github.com/noeGnh/vue3-map-chart/blob/master/demo.gif"/>
+<img width="600" alt="Demo GIF" src="https://github.com/noeGnh/map-chart/blob/master/demo.gif"/>
 </p>
 
 Pick one of the four packages below and head to its README for the full API. They all share the same props, the same ~264 built-in maps, and the same behavior — only the framework glue differs.
@@ -65,7 +65,7 @@ Full prop/event reference, custom SVG maps, and more examples are in each packag
 
 ## Demo
 
-- Vue: [live demo](https://noegnh.github.io/vue3-map-chart/) — [source](packages/playground-vue)
+- Vue: [live demo](https://noegnh.github.io/map-chart/) — [source](packages/playground-vue)
 - React: [source](packages/playground-react) (run `pnpm dev-react` locally)
 
 ## Repository layout
@@ -101,8 +101,8 @@ This package uses SVG maps from [`amCharts`](https://www.amcharts.com/)
 
 ## Changelog
 
-Detailed changes for each release are documented in the [release notes](https://github.com/noeGnh/vue3-map-chart/releases).
+Detailed changes for each release are documented in the [release notes](https://github.com/noeGnh/map-chart/releases).
 
 ## License
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/noeGnh/vue3-map-chart/blob/master/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/noeGnh/map-chart/blob/master/LICENSE)
