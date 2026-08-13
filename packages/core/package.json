@@ -32,7 +32,7 @@
     "vitest": "^4.1.10"
   },
   "dependencies": {
-    "dompurify": "^3.4.12",
+    "dompurify": "^3.4.13",
     "i18n-iso-countries": "^7.14.0",
     "iso-3166-2": "^1.0.0"
   }
