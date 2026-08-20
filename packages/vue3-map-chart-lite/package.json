@@ -43,7 +43,7 @@
     "@vueuse/core": "^14.4.0",
     "auto-changelog": "^2.6.0",
     "i18n-iso-countries": "^7.14.0",
-    "rollup-plugin-visualizer": "^7.0.1",
+    "rollup-plugin-visualizer": "^7.1.1",
     "tsx": "^4.23.5",
     "vite": "^8.2.1",
     "vitest": "^4.1.10"
