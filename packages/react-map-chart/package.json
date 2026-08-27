@@ -46,7 +46,7 @@
     "@types/node": "^26.2.0",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
-    "@vitejs/plugin-react": "^6.0.5",
+    "@vitejs/plugin-react": "^6.1.0",
     "auto-changelog": "^2.6.0",
     "i18n-iso-countries": "^7.14.0",
     "fast-glob": "^3.3.3",
