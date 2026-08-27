@@ -24,7 +24,7 @@
   "peerDependencies": {},
   "devDependencies": {
     "@types/iso-3166-2": "^1.0.4",
-    "@types/jsdom": "^28.0.3",
+    "@types/jsdom": "^30.0.0",
     "fast-glob": "^3.3.3",
     "svgo": "^4.0.2",
     "tsx": "^4.23.12",
