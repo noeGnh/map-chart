@@ -62,7 +62,7 @@
     "eslint-plugin-vue": "^9.33.0",
     "husky": "^9.1.7",
     "jsdom": "^30.0.1",
-    "lint-staged": "^17.3.0",
+    "lint-staged": "^17.4.1",
     "prettier": "^3.9.6",
     "typescript": "~6.0.3",
     "unplugin-auto-import": "^21.1.0",
