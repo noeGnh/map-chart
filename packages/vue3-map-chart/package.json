@@ -40,7 +40,7 @@
   "devDependencies": {
     "@map-chart/core": "workspace:*",
     "@types/jsdom": "^30.0.0",
-    "@types/node": "^26.2.0",
+    "@types/node": "^26.4.1",
     "@vueuse/core": "^14.4.0",
     "auto-changelog": "^2.6.0",
     "fast-glob": "^3.3.3",
