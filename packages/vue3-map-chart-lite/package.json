@@ -45,7 +45,7 @@
     "i18n-iso-countries": "^7.14.0",
     "rollup-plugin-visualizer": "^7.1.1",
     "tsx": "^4.23.12",
-    "vite": "^8.2.2",
+    "vite": "^8.3.0",
     "vitest": "^4.1.10"
   },
   "repository": {
