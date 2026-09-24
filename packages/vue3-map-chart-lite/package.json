@@ -41,7 +41,7 @@
     "@map-chart/core": "workspace:*",
     "@types/jsdom": "^30.0.0",
     "@vueuse/core": "^14.4.0",
-    "auto-changelog": "^2.6.0",
+    "auto-changelog": "^2.6.1",
     "i18n-iso-countries": "^7.14.0",
     "rollup-plugin-visualizer": "^7.1.1",
     "tsx": "^4.23.12",
