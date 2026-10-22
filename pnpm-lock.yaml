@@ -84,8 +84,8 @@ importers:
         specifier: ^8.3.4
         version: 8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1)
       vitest:
-        specifier: ^5.0.3
-        version: 5.0.3(@types/node@26.6.5)(jsdom@30.1.1)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1))
+        specifier: ^5.0.5
+        version: 5.0.5(@types/node@26.6.5)(jsdom@30.1.1)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1))
       vue:
         specifier: ^3.5.41
         version: 3.5.41(typescript@6.0.3)
@@ -124,8 +124,8 @@ importers:
         specifier: ^8.3.4
         version: 8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1)
       vitest:
-        specifier: ^5.0.3
-        version: 5.0.3(@types/node@26.6.5)(jsdom@30.1.1)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1))
+        specifier: ^5.0.5
+        version: 5.0.5(@types/node@26.6.5)(jsdom@30.1.1)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1))
 
   packages/docs:
     dependencies:
@@ -253,8 +253,8 @@ importers:
         specifier: ^8.3.4
         version: 8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1)
       vitest:
-        specifier: ^5.0.3
-        version: 5.0.3(@types/node@26.6.5)(jsdom@30.1.1)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1))
+        specifier: ^5.0.5
+        version: 5.0.5(@types/node@26.6.5)(jsdom@30.1.1)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1))
 
   packages/react-map-chart-lite:
     devDependencies:
@@ -307,8 +307,8 @@ importers:
         specifier: ^8.3.4
         version: 8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1)
       vitest:
-        specifier: ^5.0.3
-        version: 5.0.3(@types/node@26.6.5)(jsdom@30.1.1)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1))
+        specifier: ^5.0.5
+        version: 5.0.5(@types/node@26.6.5)(jsdom@30.1.1)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1))
 
   packages/vue3-map-chart:
     dependencies:
@@ -350,8 +350,8 @@ importers:
         specifier: ^5.1.3
         version: 5.1.3(supports-color@7.2.0)(vue@3.5.41(typescript@6.0.3))
       vitest:
-        specifier: ^5.0.3
-        version: 5.0.3(@types/node@26.6.5)(jsdom@30.1.1)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1))
+        specifier: ^5.0.5
+        version: 5.0.5(@types/node@26.6.5)(jsdom@30.1.1)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1))
 
   packages/vue3-map-chart-lite:
     dependencies:
@@ -384,8 +384,8 @@ importers:
         specifier: ^8.3.4
         version: 8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1)
       vitest:
-        specifier: ^5.0.3
-        version: 5.0.3(@types/node@26.6.5)(jsdom@30.1.1)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1))
+        specifier: ^5.0.5
+        version: 5.0.5(@types/node@26.6.5)(jsdom@30.1.1)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1))
 
 packages:
 
@@ -1825,10 +1825,10 @@ packages:
       vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
       vue: ^3.2.25 || ^3.6.0-rc.10
 
-  '@vitest/mocker@5.0.3':
-    resolution: {integrity: sha512-T8sWAIbkSyAjkwTcaEc3Iu0o9A27X1/kdXrizhZkGuSKScRQtRzclfAMpOTcGdXCsqxeWlpGy3XjqaW8CpLORg==}
+  '@vitest/mocker@5.0.5':
+    resolution: {integrity: sha512-xLL3lkDegJZw+MGoGaCCsFayDZthGgpAtr3Vziyfc4p7xH89K7KRPcRBBh/kEYm0Aqkt5DtTmkYpBtRV/FrHZg==}
     peerDependencies:
-      msw: ^2.4.9
+      msw: ^2.4.9 || ^3.0.0
       vite: ^6.0.0 || ^7.0.0 || ^8.0.0
     peerDependenciesMeta:
       msw:
@@ -1836,8 +1836,8 @@ packages:
       vite:
         optional: true
 
-  '@vitest/spy@5.0.3':
-    resolution: {integrity: sha512-XhFysQTB8AZ+P4gMi+Lpo99vg2AZi0qKpaB9yXQl37+CaMEAPO3iH/wGVnSyL5MPERiLezpqTVtrR6UZH5GCXg==}
+  '@vitest/spy@5.0.5':
+    resolution: {integrity: sha512-lwJRExuH417257Q5wv9QYugN9IMJkoxcrKrYxGPQkBzl7wlNpTUxD/5yNX4ESKVUIShKPgkGchYPFMWOOk0wzw==}
 
   '@volar/language-core@2.4.28':
     resolution: {integrity: sha512-w4qhIJ8ZSitgLAkVay6AbcnC7gP3glYM3fYwKV3srj8m494E3xtrCv6E+bWviiK/8hs6e6t1ij1s2Endql7vzQ==}
@@ -3269,9 +3269,6 @@ packages:
   magic-string@1.1.0:
     resolution: {integrity: sha512-kS3VHe0nEPST2saQV4Rbkchcd3UBRkVTQHo1D3h/ZTwFDhai/mfKkmtPAtD129EOI7K3HlHIsFOt0WrI2/oU9g==}
 
-  magic-string@1.4.2:
-    resolution: {integrity: sha512-vG+rjFRj1PqdIBozIxAGMjPlOhaVe+GXpbttY/iSK7rGcJRMlwNJO7dcUwmUqkymsFLJiNGI06t4D7Fr7yRC9g==}
-
   magic-string@1.4.3:
     resolution: {integrity: sha512-z12OxmaPGE0F4xlpGdjuAUckipLpQlTAuAmyGhNoD7ODpYUzvDfvtxUbjM/jwznyP178oju/KDdyi220wNJ0RQ==}
 
@@ -3432,8 +3429,8 @@ packages:
   obug@2.1.1:
     resolution: {integrity: sha512-uTqF9MuPraAQ+IsnPf366RG4cP9RtUi7MLO1N3KEc+wb0a6yKpeL0lmk2IB1jY5KHPAlTc6T/JRdC/YqxHNwkQ==}
 
-  obug@2.2.1:
-    resolution: {integrity: sha512-XrsrhT5sybtKI6wakr2SPOlGZWWYbUXZ7a0jT8/QOeAPau+1X/bSegNe5YR75oJmEZQbKningirmGOEJCIk61Q==}
+  obug@3.0.0:
+    resolution: {integrity: sha512-5vvB5+W7ePv+p3uqxi+RcW1XAzLW0/hxt3/4X4Lc4qHudzOhmBiBwOY6DRob4WnanAEGvNcLjF+KNOufrUoEQw==}
     engines: {node: '>=12.20.0'}
 
   once@1.4.0:
@@ -4256,20 +4253,20 @@ packages:
       postcss:
         optional: true
 
-  vitest@5.0.3:
-    resolution: {integrity: sha512-xMw97S3rjdtj5dkVat7jCsqWBpvchs3RlpQctUqwJD0KkERk40vz2fJ77lDwW/Vzh/pk18eItYAzkodhSes3jQ==}
+  vitest@5.0.5:
+    resolution: {integrity: sha512-cPODOMF8YnkiiYtDdHo6n4wWmBrOBBbOIYH2d33M4l3CdNn72h+qMmO6uXffUN6A5AZFXNND/d+krS9mgkXRfg==}
     engines: {node: ^22.12.0 || ^24.0.0 || >=26.0.0}
     hasBin: true
     peerDependencies:
       '@edge-runtime/vm': '*'
       '@opentelemetry/api': ^1.9.0
       '@types/node': ^22.0.0 || >=24.0.0
-      '@vitest/browser-playwright': 5.0.3
-      '@vitest/browser-preview': 5.0.3
+      '@vitest/browser-playwright': 5.0.5
+      '@vitest/browser-preview': 5.0.5
       '@vitest/browser-webdriverio': ^5.0.0-beta.5 || >=5.0.0
-      '@vitest/coverage-istanbul': 5.0.3
-      '@vitest/coverage-v8': 5.0.3
-      '@vitest/ui': 5.0.3
+      '@vitest/coverage-istanbul': 5.0.5
+      '@vitest/coverage-v8': 5.0.5
+      '@vitest/ui': 5.0.5
       happy-dom: '*'
       jsdom: '*'
       vite: ^6.4.0 || ^7.0.0 || ^8.0.0
@@ -5642,16 +5639,16 @@ snapshots:
       vite: 8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1)
       vue: 3.5.41(typescript@6.0.3)
 
-  '@vitest/mocker@5.0.3(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1))':
+  '@vitest/mocker@5.0.5(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1))':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
-      '@vitest/spy': 5.0.3
+      '@vitest/spy': 5.0.5
       estree-walker: 3.0.3
       magic-string: 1.4.3
     optionalDependencies:
       vite: 8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1)
 
-  '@vitest/spy@5.0.3': {}
+  '@vitest/spy@5.0.5': {}
 
   '@volar/language-core@2.4.28':
     dependencies:
@@ -7394,10 +7391,6 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  magic-string@1.4.2:
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.6.0
-
   magic-string@1.4.3:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.6.0
@@ -7571,7 +7564,7 @@ snapshots:
 
   obug@2.1.1: {}
 
-  obug@2.2.1: {}
+  obug@3.0.0: {}
 
   once@1.4.0:
     dependencies:
@@ -8306,7 +8299,7 @@ snapshots:
       escape-string-regexp: 5.0.0
       estree-walker: 3.0.3
       local-pkg: 1.2.1
-      magic-string: 1.4.2
+      magic-string: 1.4.3
       mlly: 1.8.2
       pathe: 2.0.3
       picomatch: 4.0.7
@@ -8547,15 +8540,15 @@ snapshots:
       - typescript
       - universal-cookie
 
-  vitest@5.0.3(@types/node@26.6.5)(jsdom@30.1.1)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1)):
+  vitest@5.0.5(@types/node@26.6.5)(jsdom@30.1.1)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1)):
     dependencies:
       '@types/chai': 5.2.3
-      '@vitest/mocker': 5.0.3(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1))
+      '@vitest/mocker': 5.0.5(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1))
       chai: 6.3.0
       es-module-lexer: 2.3.2
       expect-type: 1.4.0
       magic-string: 1.4.3
-      obug: 2.2.1
+      obug: 3.0.0
       picomatch: 4.0.7
       std-env: 4.3.0
       tinybench: 6.2.2
