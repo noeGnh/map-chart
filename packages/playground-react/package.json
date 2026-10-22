@@ -13,11 +13,11 @@
     "@arkn/react-map-chart": "workspace:*",
     "@arkn/react-map-chart-lite": "workspace:*",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.3.1"
   },
   "devDependencies": {
     "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.7",
+    "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
     "gh-pages": "^6.3.0",
     "typescript": "~6.0.3",
