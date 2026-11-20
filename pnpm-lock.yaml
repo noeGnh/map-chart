@@ -27,8 +27,8 @@ importers:
         specifier: ^6.0.11
         version: 6.0.11(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(terser@5.31.3)(tsx@4.23.15)(yaml@2.9.1))(vue@3.5.44(typescript@6.0.3))
       '@vue/compiler-dom':
-        specifier: ^3.5.44
-        version: 3.5.44
+        specifier: ^3.5.45
+        version: 3.5.45
       '@vue/compiler-sfc':
         specifier: ^3.5.45
         version: 3.5.45
@@ -40,7 +40,7 @@ importers:
         version: 13.0.0(eslint-plugin-vue@9.33.0(eslint@8.57.1(supports-color@7.2.0))(supports-color@7.2.0))(eslint@8.57.1(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
       '@vue/test-utils':
         specifier: ^2.5.1
-        version: 2.5.1(@vue/compiler-dom@3.5.44)(@vue/server-renderer@3.5.44)(vue@3.5.44(typescript@6.0.3))
+        version: 2.5.1(@vue/compiler-dom@3.5.45)(@vue/server-renderer@3.5.44)(vue@3.5.44(typescript@6.0.3))
       '@vue/tsconfig':
         specifier: ^0.9.1
         version: 0.9.1(typescript@6.0.3)(vue@3.5.44(typescript@6.0.3))
@@ -519,6 +519,10 @@ packages:
     resolution: {integrity: sha512-fWegr+WsEsiMVW4KUNdIIzzMTZSzNiqhy0//6+2MRi2d5NFNsL/AYwBQW8eBnRbTBVRnDVzjaJEUqKaCWjMMdQ==}
     engines: {node: '>=6.9.0'}
 
+  '@babel/helper-string-parser@7.29.14':
+    resolution: {integrity: sha512-CXvKMFvM80ihI7Vox9jb+kQjnyjESQNPM+vB7U0Zz6TWuZA+Z/FL0QPMH300h33qJtIx+REeBhXqWOPW48TcAQ==}
+    engines: {node: '>=6.9.0'}
+
   '@babel/helper-string-parser@7.29.7':
     resolution: {integrity: sha512-Pb5ijPrZ89GDH8223L4UP8i6QApWxs04RbPQJTeWDV0/keR2E36MeKnyr6LYmUUvqRRI+Iv87SuF1W6ErINzYw==}
     engines: {node: '>=6.9.0'}
@@ -559,6 +563,11 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
 
+  '@babel/parser@7.29.14':
+    resolution: {integrity: sha512-VL220vXuyO2z3rNIQwY7ftj9UwpqOt+33sH+sBWkOekbsSR2g7EEMnOx24ZlCH0xOA3DM/33SifVFGbnJD8r/w==}
+    engines: {node: '>=6.0.0'}
+    hasBin: true
+
   '@babel/parser@7.29.7':
     resolution: {integrity: sha512-hnORnjP/1P/zFEndoeX+n+t1RwWRJiJpM/jO7FW32Kn9r5+sJB2JWOdYo4L6k78j15eCwY3Gm/7364B1EMwtNg==}
     engines: {node: '>=6.0.0'}
@@ -594,6 +603,10 @@ packages:
 
   '@babel/types@7.29.11':
     resolution: {integrity: sha512-WCsemW40Cpc6gouC1SrY6PBaZ+oLRlEVY9XBvZBI7il/HyUrb2nJ505wE1MHEFyDZNnrWDEuy4jL50WVHfTTSQ==}
+    engines: {node: '>=6.9.0'}
+
+  '@babel/types@7.29.14':
+    resolution: {integrity: sha512-UjI/dKmwJwT9pOszJitq2G6EObZPnsZUfdCr92z2TlF3EZK9J3EdfOKUrCzHl6wFthbzwhzl1Soc/UIwxRiq6w==}
     engines: {node: '>=6.9.0'}
 
   '@babel/types@7.29.7':
@@ -4591,7 +4604,7 @@ snapshots:
 
   '@babel/generator@7.29.8':
     dependencies:
-      '@babel/parser': 7.29.12
+      '@babel/parser': 7.29.13
       '@babel/types': 7.29.11
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.31
@@ -4629,6 +4642,8 @@ snapshots:
 
   '@babel/helper-string-parser@7.29.13': {}
 
+  '@babel/helper-string-parser@7.29.14': {}
+
   '@babel/helper-string-parser@7.29.7': {}
 
   '@babel/helper-validator-identifier@7.28.5': {}
@@ -4658,6 +4673,10 @@ snapshots:
     dependencies:
       '@babel/types': 7.29.11
 
+  '@babel/parser@7.29.14':
+    dependencies:
+      '@babel/types': 7.29.14
+
   '@babel/parser@7.29.7':
     dependencies:
       '@babel/types': 7.29.7
@@ -4669,13 +4688,13 @@ snapshots:
   '@babel/template@7.28.6':
     dependencies:
       '@babel/code-frame': 7.29.7
-      '@babel/parser': 7.29.12
+      '@babel/parser': 7.29.13
       '@babel/types': 7.29.11
 
   '@babel/template@7.29.7':
     dependencies:
       '@babel/code-frame': 7.29.7
-      '@babel/parser': 7.29.12
+      '@babel/parser': 7.29.13
       '@babel/types': 7.29.11
 
   '@babel/traverse@7.29.0(supports-color@7.2.0)':
@@ -4695,7 +4714,7 @@ snapshots:
       '@babel/code-frame': 7.29.7
       '@babel/generator': 7.29.8
       '@babel/helper-globals': 7.29.7
-      '@babel/parser': 7.29.12
+      '@babel/parser': 7.29.13
       '@babel/template': 7.29.7
       '@babel/types': 7.29.11
       debug: 4.4.3(supports-color@7.2.0)
@@ -4710,6 +4729,11 @@ snapshots:
   '@babel/types@7.29.11':
     dependencies:
       '@babel/helper-string-parser': 7.29.13
+      '@babel/helper-validator-identifier': 7.29.7
+
+  '@babel/types@7.29.14':
+    dependencies:
+      '@babel/helper-string-parser': 7.29.14
       '@babel/helper-validator-identifier': 7.29.7
 
   '@babel/types@7.29.7':
@@ -5636,7 +5660,7 @@ snapshots:
 
   '@vue/compiler-core@3.5.41':
     dependencies:
-      '@babel/parser': 7.29.12
+      '@babel/parser': 7.29.13
       '@vue/shared': 3.5.41
       entities: 7.0.1
       estree-walker: 2.0.2
@@ -5652,7 +5676,7 @@ snapshots:
 
   '@vue/compiler-core@3.5.45':
     dependencies:
-      '@babel/parser': 7.29.13
+      '@babel/parser': 7.29.14
       '@vue/shared': 3.5.45
       entities: 7.0.1
       estree-walker: 2.0.2
@@ -5766,8 +5790,8 @@ snapshots:
   '@vue/language-core@3.3.14':
     dependencies:
       '@volar/language-core': 2.4.30
-      '@vue/compiler-dom': 3.5.44
-      '@vue/shared': 3.5.44
+      '@vue/compiler-dom': 3.5.45
+      '@vue/shared': 3.5.45
       alien-signals: 3.2.1
       muggle-string: 0.4.1
       path-browserify: 1.0.1
@@ -5825,9 +5849,9 @@ snapshots:
 
   '@vue/shared@3.5.45': {}
 
-  '@vue/test-utils@2.5.1(@vue/compiler-dom@3.5.44)(@vue/server-renderer@3.5.44)(vue@3.5.44(typescript@6.0.3))':
+  '@vue/test-utils@2.5.1(@vue/compiler-dom@3.5.45)(@vue/server-renderer@3.5.44)(vue@3.5.44(typescript@6.0.3))':
     dependencies:
-      '@vue/compiler-dom': 3.5.44
+      '@vue/compiler-dom': 3.5.45
       js-beautify: 2.0.3
       vue: 3.5.44(typescript@6.0.3)
       vue-component-type-helpers: 3.3.12
@@ -7782,7 +7806,7 @@ snapshots:
   rolldown@1.2.15:
     dependencies:
       '@oxc-project/types': 0.155.0
-      '@rolldown/pluginutils': 1.0.1
+      '@rolldown/pluginutils': 1.1.1
     optionalDependencies:
       '@rolldown/binding-android-arm-eabi': 1.2.15
       '@rolldown/binding-android-arm64': 1.2.15
